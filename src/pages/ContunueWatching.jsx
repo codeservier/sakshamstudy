@@ -1,10 +1,11 @@
 import React from "react";
 import image1 from "../assets/courses/Course.png";
-import image2 from "../assets/bp.png";
-import image3 from "../assets/a.png";
-import image4 from "../assets/3.2.png";
-import image5 from "../assets/3.3.png";
-import image6 from "../assets/3.4.png";
+import image2 from "../assets/courses/Course.png";
+import image3 from "../assets/courses/Course.png";
+import image4 from "../assets/courses/Course.png";
+import image5 from "../assets/courses/Course.png";
+import image6 from "../assets/courses/Course.png";
+
 import Card from "../components/card/Card";
 import { useNavigate, useParams } from "react-router-dom";
 
