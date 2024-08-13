@@ -107,7 +107,7 @@ const ContactPage = () => {
   };
   return (
     <>
-      <section className="bg-[#f5f5dc] min-h-screen">
+      <section className="bg-[#f5f5dc]  min-h-screen  hover:scale-95 hover:bg-orange-300 transition-all duration-300 ">
         <div className="container mx-auto p-4 ">
           <h1 className="text-4xl text-center font-medium text-[#800020] text-400 mb-8">
             Contact Us

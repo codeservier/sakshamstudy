@@ -29,7 +29,7 @@ const Header = () => {
         <nav className="items-center hidden space-x-12 font-bold md:flex">
           
           <Link to="/" className="hover:text-gray-300">Home</Link>
-          <Link to="/mylearning" className="hover:text-gray-300">Our Courses</Link>
+          <Link to="/mylearning" className="hover:text-gray-300">Courses</Link>
           <Link to="/about" className="hover:text-gray-300">About Us</Link>
           <Link to="/new-contact" className="hover:text-gray-300">Contact Us</Link>
           <Link to="/new-contact" className="hover:text-gray-300">FAQ</Link>
@@ -53,9 +53,9 @@ const Header = () => {
 
         <div className="hidden md:block bg-[#F68B33] font-bold rounded-lg p-3 text-white">
           <nav>
-            <Link to="/login" className="hover:text-gray-300">Login /</Link>
+            {/* <Link to="/login" className="hover:text-gray-300">Login</Link> */}
             <Link to="/register" className="hover:text-gray-300">Registration</Link>
-            <Link to="/profile" className="hover:text-gray-300">/ Profile</Link>
+            {/* <Link to="/profile" className="hover:text-gray-300">/ Profile</Link> */}
           </nav>
         </div>
       </div>

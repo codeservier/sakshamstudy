@@ -107,7 +107,7 @@ const NewContact = () => {
   };
   return (
     <>
-      <section className="bg-[#f5f5dc] min-h-screen">
+      <section className="bg-[#f5f5dc] min-h-screen ">
         <div className="container p-4 mx-auto ">
           <h1 className="text-4xl text-center font-medium text-[#800020] text-400 mb-8">
             Contact Us
@@ -132,8 +132,8 @@ const NewContact = () => {
                 <SingleBanner image={mission} />
               </div>
               <div>
-                <div className="flex items-center justify-center">
-                  <div className="w-full max-w-lg p-8 bg-white rounded-lg shadow-lg">
+                <div className="flex items-center justify-center ">
+                  <div className="w-full max-w-lg p-8 bg-white rounded-lg shadow-lg  hover:scale-95 hover:bg-white transition-all duration-300">
                     <div className="flex justify-between mb-6 border-b">
                       <button className="text-[#800020] font-semibold py-2 px-4 border-orange-500 border-b-2">
                         Course Enquiry

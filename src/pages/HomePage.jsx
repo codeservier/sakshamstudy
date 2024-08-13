@@ -19,7 +19,7 @@ export const HomePage = () => {
         </div>
       ) : (
         <>
-          <div className="max-w-screen-xl mx-auto px-6  " >
+          <div className="max-w-screen mx-auto px-1   " >
             <Banner />
           </div>
           <div className="max-w-screen-xl mx-auto px-2 ">
