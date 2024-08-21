@@ -13,7 +13,7 @@ const   Toppicks = () => {
 
   const cardsData = [
     {
-      title: "Academic Courses",
+      title: "Library",
       description: "By Best Teaching faculty",
       image: image1,
       button: (
@@ -26,7 +26,7 @@ const   Toppicks = () => {
       ),
     },
     {
-      title: "Tech Courses",
+      title: "Acadmic Courses",
       description: "By Tech Faculty",
       image: image2,
       button: (

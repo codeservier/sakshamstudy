@@ -8,7 +8,7 @@ const SingleBanner = ({ image }) => {
         alt="single-banner"
         height="2000"
         width="2000"
-        className="w-full md:h-[400px] min-h-[200px] object-contain"
+        className="w-full md:h-[400px] min-h-[200px] object-contain "
       />
     </div>
   );
