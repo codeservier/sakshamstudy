@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import TermCondition from '../TermCondition'; 
 import AboutPage from "../AboutPage";
 import ContactPage from "../ContactPage";
 import SearchPage from "../SearchPage";
@@ -17,6 +18,7 @@ import Subscription from "../../components/profile/Subscription";
 import PaymentMethod from "../../components/profile/PaymentMethod";
 import PublicProfile from "../../components/profile/PublicProfile";
 import Wishlisttab from "../../components/wishlisttab/Wishlisttab";
+import PaymentPage from "../../components/PaymentPage";
 import AdminPanel from "../../Admin/Admin";
 import CartPage from "../CartPage";
 import Checkout from "./Checkout";
@@ -43,6 +45,8 @@ const AppRoutes = () => {
           <Route path="/lecture" element={<LecturePage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/terms-and-conditions" element={<TermCondition />} />
+          <Route path="/payment" element={<PaymentPage />} />
           <Route path="*" element={<PageNotFound />} />
           <Route path="/admin" element={<AdminPanel />} />
         </Routes>

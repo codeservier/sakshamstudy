@@ -1,34 +1,50 @@
 import React, { useState } from "react";
 import logo from "../assets/logo.png";
-import ImageSlider from "../components/banner/ImageSlider";
 import { db, auth } from "../../firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { SiAxios } from "react-icons/si";
 
 const RegistrationPage = () => {
+  const courses = ["Course 1", "Course 2", "Course 3"]; // Example courses
+  const slots = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]; // Example slots
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phoneNumber: "",
+    course: "",
+    address: "",
+    pinCode: "",
+    district: "",
+    state: "",
     password: "",
     confirmPassword: "",
+    selectedCourses: [], // Initialize selectedCourses
+    selectedSlots: [],
+    agreedToTerms: false, // Initialize agreedToTerms
   });
 
   const [errors, setErrors] = useState({});
+  const [courseError, setCourseError] = useState("");
+  const [slotError, setSlotError] = useState("");
+  const [isPaymentComplete, setIsPaymentComplete] = useState(false); // Track payment status
+
+  // For slot selection error
 
   const handleInputChange = (e) => {
-    const { id, value } = e.target;
+    const { id, value, type, checked } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [id]: value,
+      [id]: type === "checkbox" ? checked : value,
     }));
+
     // Basic validation for empty fields
     setErrors((prevErrors) => ({
       ...prevErrors,
       [id]: value ? "" : `${id} is required`,
     }));
   };
+
   const handlePhoneNumberChange = (e) => {
     const { id, value } = e.target;
 
@@ -44,9 +60,63 @@ const RegistrationPage = () => {
       }));
     }
   };
+
+  const handleCourseChange = (e) => {
+    const selectedCourse = e.target.value;
+    if (selectedCourse && !formData.selectedCourses.includes(selectedCourse)) {
+      setFormData((prevData) => ({
+        ...prevData,
+        selectedCourses: [...prevData.selectedCourses, selectedCourse],
+      }));
+      setCourseError("");
+    }
+  };
+
+  const removeCourse = (courseToRemove) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      selectedCourses: prevData.selectedCourses.filter(
+        (course) => course !== courseToRemove
+      ),
+    }));
+  };
+
+  const handleSlotChange = (e) => {
+    const selectedSlot = e.target.value;
+    if (selectedSlot && !formData.selectedSlots.includes(selectedSlot)) {
+      setFormData((prevData) => ({
+        ...prevData,
+        selectedSlots: [...prevData.selectedSlots, selectedSlot],
+      }));
+      setSlotError("");
+    }
+  };
+
+  const removeSlot = (slotToRemove) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      selectedSlots: prevData.selectedSlots.filter(
+        (slot) => slot !== slotToRemove
+      ),
+    }));
+  };
+
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    const { name, email, phoneNumber, password, confirmPassword } = formData;
+    const {
+      name,
+      email,
+      phoneNumber,
+      address,
+      pinCode,
+      district,
+      state,
+      password,
+      confirmPassword,
+      selectedCourses,
+      selectedSlots,
+      agreedToTerms,
+    } = formData;
 
     // Validation checks
     const newErrors = {};
@@ -56,7 +126,7 @@ const RegistrationPage = () => {
     } else {
       const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       if (!emailPattern.test(email)) {
-        newErrors.email = "Please enter a valid Email";
+        newErrors.email = "Please enter a valid email";
       }
     }
     if (!phoneNumber) {
@@ -64,9 +134,26 @@ const RegistrationPage = () => {
     } else if (phoneNumber.length !== 10) {
       newErrors.phoneNumber = "Phone number must be exactly 10 digits";
     }
+    if (selectedCourses.length === 0) {
+      setCourseError("Please select at least one course");
+    } else {
+      setCourseError("");
+    }
+    if (selectedSlots.length === 0) {
+      setSlotError("Please select at least one slot");
+    } else {
+      setSlotError("");
+    }
+    if (!address) newErrors.address = "Address is required";
+    if (!pinCode) newErrors.pinCode = "Pin code is required";
+    if (!district) newErrors.district = "Please enter District";
+    if (!state) newErrors.state = "Please enter State";
     if (!password) newErrors.password = "Password is required";
     if (password !== confirmPassword)
       newErrors.confirmPassword = "Passwords do not match";
+    if (!agreedToTerms) {
+      newErrors.terms = "You must agree to the terms and conditions";
+    }
 
     setErrors(newErrors);
 
@@ -84,26 +171,39 @@ const RegistrationPage = () => {
       const user = userCredential.user;
       console.log("User signed up:", user);
       if (user) {
-        await addDoc(collection(db, "registrations"), {
+        localStorage.setItem("registrationData", JSON.stringify({
           name: name,
           email: email,
           phoneNumber: phoneNumber,
+          selectedCourses: selectedCourses, // Save selected courses
+          selectedSlots: selectedSlots,
+          address,
+          pinCode,
+          district,
+          state,
           password: password,
           userId: user.uid,
-        });
+          agreedToTerms,
+          // Save selected slots
+        }));
         console.log("Registration successful");
-        alert("Registration completed sucessfully!");
-       
+        // alert("Registration completed successfully!");
+        window.location.href = "/payment";
+
         setFormData({
           name: "",
           email: "",
           phoneNumber: "",
+          address: "",
+          pinCode: "",
+          district: "",
+          state: "",
           password: "",
           confirmPassword: "",
+          selectedCourses: [], // Reset selected courses
+          selectedSlots: [], // Reset selected slots
+          agreedToTerms: false, // Reset agreedToTerms
         });
-      } else {
-        console.log("Registration failed");
-        alert("Registration failed");
       }
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
@@ -116,32 +216,34 @@ const RegistrationPage = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2">
-      <div className="justify-center items-center bg-blue-50">
-        <ImageSlider />
-      </div>
-      <div>
-        <div className="mb-4 md:mb-8">
-          <img src={logo} alt="Logo" className="w-24 mx-auto" />
+    <div className="flex justify-center items-center w-screen">
+      <div className="bg-white p-8 rounded-lg w-full h-full flex flex-col justify-center">
+        <div className="flex justify-center py-4">
+          <img
+            src={logo}
+            alt="Logo"
+            className="w-20 sm:w-24 md:w-28 lg:w-32 xl:w-36"
+          />
         </div>
-        <h2 className="text-2xl font-bold mb-4 md:mb-8 text-center">
+        <h1 className="text-2xl font-bold mb-4 md:mb-8 text-center">
           Registration here
-        </h2>
+        </h1>
         <form className="px-14" onSubmit={handleOnSubmit}>
-          <div className="grid grid-cols-1 gap-0 sm:gap-6 mb-6">
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 mb-6">
             <div className="flex flex-col mb-6 sm:mb-0">
               <label className="mb-1 font-semibold text-gray-400">Name</label>
               <input
                 id="name"
                 type="text"
-                placeholder="Please enter your name"
+                placeholder="Name"
                 value={formData.name}
                 onChange={handleInputChange}
                 className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#F68B33]"
               />
               <span className="text-red-600">{errors.name}</span>
             </div>
-            <div className="md:flex flex-row gap-4">
+
+            <div className="md:flex flex-row gap-4 ">
               <div className="flex flex-col mb-6 sm:mb-0 flex-1">
                 <label className="mb-1 font-semibold text-gray-400">
                   Email
@@ -149,7 +251,7 @@ const RegistrationPage = () => {
                 <input
                   id="email"
                   type="email"
-                  placeholder="Please enter your email"
+                  placeholder="Email"
                   value={formData.email}
                   onChange={handleInputChange}
                   className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#F68B33]"
@@ -162,39 +264,175 @@ const RegistrationPage = () => {
                 </label>
                 <input
                   id="phoneNumber"
-                  type="int"
-                  placeholder="Phone"
+                  type="text"
+                  placeholder="Phone Number"
                   value={formData.phoneNumber}
-                  onChange={handleInputChange}
+                  onChange={handlePhoneNumberChange}
                   className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#F68B33]"
                 />
                 <span className="text-red-600">{errors.phoneNumber}</span>
               </div>
             </div>
-            <div className="md:flex flex-row gap-4">
+
+            <div className="md:flex flex-row gap-4 ">
+              {" "}
+              {/* Decreased gap between Select Slots and Address */}
               <div className="flex flex-col mb-6 sm:mb-0 flex-1">
+                <label className="mb-1 font-semibold text-gray-400">
+                  Select Courses
+                </label>
+                <select
+                  id="course"
+                  value={formData.course}
+                  onChange={handleCourseChange}
+                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#F68B33]"
+                >
+                  <option value="">Select a course</option>
+                  {courses.map((course, index) => (
+                    <option key={index} value={course}>
+                      {course}
+                    </option>
+                  ))}
+                </select>
+                <div className="mt-2 flex flex-wrap gap-4">
+                  {formData.selectedCourses.map((course, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center bg-[#F68B33] text-white rounded-full py-1 px-4 border-b border-gray-200 mb-2"
+                    >
+                      <span className="mr-2">{course}</span>
+                      <button
+                        type="button"
+                        onClick={() => removeCourse(course)}
+                        className="text-white-bold text-xl"
+                      >
+                        &#10005; {/* Unicode for cross icon */}
+                      </button>
+                    </div>
+                  ))}
+                  <span className="text-red-600">{courseError}</span>
+                </div>
+              </div>
+              <div className="flex flex-col mb-6 sm:mb-0 flex-1">
+                <label className="mb-1 font-semibold text-gray-400">
+                  Select Slots
+                </label>
+                <select
+                  id="slot"
+                  value={formData.slot}
+                  onChange={handleSlotChange}
+                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#F68B33]"
+                >
+                  <option value="">Number of slots</option>
+                  {slots.map((slot, index) => (
+                    <option key={index} value={slot}>
+                      Slot {slot}
+                    </option>
+                  ))}
+                </select>
+                <div className="mt-2 flex flex-wrap gap-4">
+                  {formData.slot && (
+                    <div className="flex justify-between items-center bg-[#F68B33] text-white rounded-full px-4 py-2">
+                      <span className="mr-2">Slot {formData.slot}</span>
+                      <button
+                        type="button"
+                        onClick={() => removeSlot()}
+                        className="text-white text-xl"
+                      >
+                        &#10005; {/* Unicode for cross icon */}
+                      </button>
+                    </div>
+                  )}
+                  <span className="text-red-600">{slotError}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="md:flex flex-row gap-4 ">
+              <div className="flex flex-col mb-6 sm:mb-0 flex-1">
+                <label className="mb-1 font-semibold text-gray-400">
+                  Address
+                </label>
+                <input
+                  id="address"
+                  type="text"
+                  placeholder="Address"
+                  value={formData.address}
+                  onChange={handleInputChange}
+                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#F68B33]"
+                />
+                <span className="text-red-600">{errors.address}</span>
+              </div>
+              <div className="flex flex-col mb-6 sm:mb-0 flex-1">
+                <label className="mb-1 font-semibold text-gray-400">
+                  Pin Code
+                </label>
+                <input
+                  id="pinCode"
+                  type="text"
+                  placeholder="Pin Code"
+                  value={formData.pinCode}
+                  onChange={handleInputChange}
+                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#F68B33]"
+                />
+                <span className="text-red-600">{errors.pinCode}</span>
+              </div>
+            </div>
+            <div className="md:flex flex-row gap-4 ">
+              <div className="flex flex-col mb-6 sm:mb-0 flex-1">
+                <label className="mb-1 font-semibold text-gray-400">
+                  District
+                </label>
+                <input
+                  id="district"
+                  type="text"
+                  placeholder="District"
+                  value={formData.district}
+                  onChange={handleInputChange}
+                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#F68B33]"
+                />
+                <span className="text-red-600">{errors.district}</span>
+              </div>
+              <div className="flex flex-col mb-6 sm:mb-0 flex-1">
+                <label className="mb-1 font-semibold text-gray-400">
+                  State
+                </label>
+                <input
+                  id="state"
+                  type="text"
+                  placeholder="State"
+                  value={formData.state}
+                  onChange={handleInputChange}
+                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#F68B33]"
+                />
+                <span className="text-red-600">{errors.state}</span>
+              </div>
+            </div>
+
+            <div className="md:flex flex-row gap-4">
+              <div className="flex flex-col mb-6 flex-1">
                 <label className="mb-1 font-semibold text-gray-400">
                   Password
                 </label>
                 <input
                   id="password"
                   type="password"
-                  maxLength={10}
-                  placeholder="Please enter your new password"
+                  placeholder="Password"
                   value={formData.password}
                   onChange={handleInputChange}
                   className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#F68B33]"
                 />
                 <span className="text-red-600">{errors.password}</span>
               </div>
-              <div className="flex flex-col mb-6 sm:mb-0 flex-1">
+
+              <div className="flex flex-col mb-6 flex-1">
                 <label className="mb-1 font-semibold text-gray-400">
-                  Confirm New Password
+                  Confirm Password
                 </label>
                 <input
                   id="confirmPassword"
                   type="password"
-                  placeholder="Please confirm your new password"
+                  placeholder="Confirm Password"
                   value={formData.confirmPassword}
                   onChange={handleInputChange}
                   className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#F68B33]"
@@ -202,33 +440,35 @@ const RegistrationPage = () => {
                 <span className="text-red-600">{errors.confirmPassword}</span>
               </div>
             </div>
+            <div className="mb-6">
+              <div className="flex items-center mb-2">
+                <input
+                  id="agreedToTerms"
+                  type="checkbox"
+                  checked={formData.agreedToTerms}
+                  onChange={handleInputChange}
+                  className="mr-2"
+                />
+                <label htmlFor="agreedToTerms" className="text-gray-600">
+                  I agree to the{" "}
+                  <a href="/terms-and-conditions" className="text-blue-600">
+                    terms and conditions
+                  </a>
+                </label>
+              </div>
+              <span className="text-red-600">{errors.terms}</span>
+            </div>
+
+            <a href="/payment" >
+              <button
+                type="submit" // Changed from submit to button
+                className="bg-[#F68B33] text-white px-4 py-2 rounded-md w-full hover:bg-[#e67e22] transition duration-300"
+              >
+                Pay Now
+              </button>
+            </a>
           </div>
-          <button
-            type="submit"
-            className="w-full bg-[#F68B33] hover:bg-[#800020]-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-[#800020] focus:ring-opacity-50"
-          >
-            Register
-          </button>
         </form>
-        <div className="mt-6 text-center text-sm md:text-base">
-          <p>
-            Don't have an Account?{" "}
-            <a href="/login" className="text-[#F68B33] hover:underline">
-              Log In
-            </a>
-          </p>
-          <p>
-            By clicking Register, you agree to our{" "}
-            <a href="/terms" className="text-[#F68B33] hover:underline">
-              Terms & Conditions
-            </a>{" "}
-            and{" "}
-            <a href="/privacy" className="text-[#F68B33] hover:underline">
-              Privacy Policy
-            </a>
-            .
-          </p>
-        </div>
       </div>
     </div>
   );
