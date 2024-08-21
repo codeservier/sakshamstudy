@@ -13,17 +13,17 @@ const libraryData = [
   {
     title: "Central Library",
     description: "The main branch of our library with extensive collections, study rooms, and community events.",
-    image: image1,
+    image: image4,
   },
   {
     title: "Northside Branch",
     description: "A popular branch known for its children’s section and educational programs for kids.",
-    image: image2,
+    image: image4,
   },
   {
     title: "West End Library",
     description: "A branch with a focus on digital resources and technology workshops for all ages.",
-    image: image3,
+    image: image4,
   },
   {
     title: "Eastside Library",
@@ -33,12 +33,12 @@ const libraryData = [
   {
     title: "Southgate Library",
     description: "Known for its vast collection of historical and research materials.",
-    image: image5,
+    image: image4,
   },
   {
     title: "Downtown Library",
     description: "The downtown location offers a quiet study space and hosts various cultural events.",
-    image: image6,
+    image: image4,
   },
 ];
 
