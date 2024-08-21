@@ -28,8 +28,17 @@ const Header = () => {
           <Link to="/mylearning" className="hover:text-gray-300">Courses</Link>
           <Link to="/about" className="hover:text-gray-300">About Us</Link>
           <Link to="/new-contact" className="hover:text-gray-300">Contact Us</Link>
-          <Link to="/new-contact" className="hover:text-gray-300">FAQ</Link>
-    
+          <Link to="/faq" className="hover:text-gray-300">FAQ</Link>
+          {/* Uncomment if needed */}
+          {/* <Link to="/wishlist" className="hover:text-gray-300">
+            <FaRegHeart className="w-6 h-6 cursor-pointer hover:text-gray-300" />
+          </Link>
+          <Link to="/search" className="hover:text-gray-300">
+            <FiSearch className="w-6 h-6 cursor-pointer hover:text-gray-300" />
+          </Link>
+          <Link to="/cart" className="block px-4 py-2">
+            <FaCartPlus className="w-6 h-6 cursor-pointer hover:text-gray-300" />
+          </Link> */}
         </nav>
 
         <div className="md:hidden">
@@ -38,10 +47,10 @@ const Header = () => {
           </button>
         </div>
 
-        <div className="hidden md:block bg-primary font-bold rounded-lg p-3 text-myblack">
+        <div className="hidden md:block bg-[#42c4e2] font-bold rounded-lg p-3 text-white">
           <nav>
             {/* <Link to="/login" className="hover:text-gray-300">Login</Link> */}
-            <Link to="/register" className="hover:text-gray-300 text-mywhite">Registration</Link>
+            <Link to="/register" className="hover:text-[#ffc61a] text-white">Registration</Link>
             {/* <Link to="/profile" className="hover:text-gray-300">/ Profile</Link> */}
           </nav>
         </div>
