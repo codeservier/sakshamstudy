@@ -2,27 +2,6 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import TermCondition from '../TermCondition'; 
-import AboutPage from "../AboutPage";
-import ContactPage from "../ContactPage";
-import SearchPage from "../SearchPage";
-import MyLearning from "../MyLearning";
-import PageNotFound from "../PageNotFound";
-import RegistrationPage from "../RegistrationPage";
-import { HomePage } from "../HomePage";
-import Layout from "../../components/Layout/Layout";
-import Login from "../Login";
-import CourseDetailPage from "../CourseDetailPage";
-import LecturePage from "../LecturePage";
-import Myprofile from "../../components/profile/Myprofile";
-import Subscription from "../../components/profile/Subscription";
-import PaymentMethod from "../../components/profile/PaymentMethod";
-import PublicProfile from "../../components/profile/PublicProfile";
-import Wishlisttab from "../../components/wishlisttab/Wishlisttab";
-import PaymentPage from "../../components/PaymentPage";
-import AdminPanel from "../../Admin/Admin";
-import CartPage from "../CartPage";
-import Checkout from "./Checkout";
-import NewContact from "../NewContact";
 import AboutPage from '../AboutPage';
 import ContactPage from '../ContactPage';
 import SearchPage from '../SearchPage';
@@ -41,12 +20,14 @@ import Wishlisttab from '../../components/wishlisttab/Wishlisttab';
 import CartPage from '../CartPage';
 import Checkout from './Checkout';
 import NewContact from '../NewContact';
+import PaymentPage from '../../components/PaymentPage';
 import AdminDashboard from '../../Admin/dashboard/AdminDashboard';
 import Dashboard from '../../Admin/pages/Dashboard';
-
 import AdLayout from '../../Admin/components/shared/AdLayout';
-import Layout from '../../components/Layout/Layout';
 import Product from '../../Admin/pages/Branches';
+import Layout from '../../components/Layout/Layout';
+
+
 
 const AppRoutes = () => {
   return (
