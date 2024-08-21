@@ -62,9 +62,9 @@ const ContinueWatching = () => {
   };
   return (
     <div className="container mx-auto p-4 my-4">
-      <h1 className="text-2xl font-medium text-myblack text-400  mb-4">
+      <h1 className="text-2xl font-medium text-primary text-400  mb-4">
         Popular Library
-      </h1>
+      </h1> 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20">
         {cardsData.map((card, index) => (
           <Card

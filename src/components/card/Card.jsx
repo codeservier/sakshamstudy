@@ -12,9 +12,9 @@ const Card = ({ title, description, image, onClick, button }) => {
         className="w-full h-auto object-cover" // Use h-auto to maintain aspect ratio
       />
       <div className="p-4">
-        <h3 className="text-lg font-medium text-[#800020]">{title}</h3>
+        <h3 className="text-lg font-medium text-primary">{title}</h3>
         <div className="flex justify-between items-center">
-          <p className="text-gray-600 transition-all duration-300">{description}</p>
+          <p className="text-myblack transition-all duration-300">{description}</p>
           {/* Render the button passed as a prop */}
           {button}
         </div>

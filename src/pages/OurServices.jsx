@@ -1,8 +1,8 @@
 import React from "react";
-import Banner from "../assets/libraries/1.png";
-import { GrSecure } from "react-icons/gr";
-import { IoFastFood } from "react-icons/io5"; // Updated import for IoFastFood
-import { GiFoodTruck } from "react-icons/gi";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBookOpen, faCalendarAlt, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faBookmark as faRegBookmark } from '@fortawesome/free-regular-svg-icons';
+import animsvg from "../assets/svg/animated.svg";
 
 const OurServices = () => {
   return (
@@ -12,9 +12,9 @@ const OurServices = () => {
           {/* Image section */}
           <div data-aos="zoom-in" className="flex justify-center">
             <img
-              src={Banner}
+              src={animsvg}
               alt="Summer Sale Banner"
-              className="max-w-full h-auto w-full max-w-[400px] object-cover"
+              className="max-w-full h-auto w-full object-cover"
             />
           </div>
 
@@ -25,31 +25,32 @@ const OurServices = () => {
               data-aos="fade-up"
               className="text-3xl sm:text-4xl font-bold"
             >
-              Summer Sale Up to 20% Off
+              Summer Sale: Up to 20% Off on Library Memberships!
             </h1>
             <p
               data-aos="fade-up"
-              className="text-sm text-gray-500 tracking-wide leading-5"
+              className="text-lg text-myblack tracking-wide leading-5"
             >
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque
-              reiciendis inventore iste ratione ex alias quis magni at optio.
+              This summer, dive into a world of knowledge with our special
+              offer! Enjoy up to 20% off on all library memberships and access a
+              wealth of resources at your fingertips.
             </p>
             <div className="flex flex-col gap-4">
               <div data-aos="fade-up" className="flex items-center gap-4">
-                <GrSecure className="text-4xl h-12 w-12 shadow-sm p-4 rounded-full bg-violet-100 dark:bg-violet-400" />
-                <p>Quality Products</p>
+                <FontAwesomeIcon icon={faBookOpen} className="text-4xl h-8 w-12" />
+                <p className="text-myblack">Vast Collection of Books: From bestsellers to timeless classics, find books across every genre and subject.</p>
               </div>
               <div data-aos="fade-up" className="flex items-center gap-4">
-                <IoFastFood className="text-4xl h-12 w-12 shadow-sm p-4 rounded-full bg-orange-100 dark:bg-orange-400" />
-                <p>Fast Delivery</p>
+                <FontAwesomeIcon icon={faRegBookmark} className="text-4xl h-8 w-12" />
+                <p className="text-myblack">Quiet Study Areas: Enjoy peaceful, dedicated spaces perfect for focused study and reading.</p>
               </div>
               <div data-aos="fade-up" className="flex items-center gap-4">
-                <GiFoodTruck className="text-4xl h-12 w-12 shadow-sm p-4 rounded-full bg-green-100 dark:bg-green-400" />
-                <p>Easy Payment Method</p>
+                <FontAwesomeIcon icon={faUsers} className="text-4xl h-8 w-12" />
+                <p className="text-myblack">Expert Assistance: Our friendly staff are here to help you find the perfect book or research material.</p>
               </div>
               <div data-aos="fade-up" className="flex items-center gap-4">
-                <GiFoodTruck className="text-4xl h-12 w-12 shadow-sm p-4 rounded-full bg-yellow-100 dark:bg-yellow-400" />
-                <p>Get Offers</p>
+                <FontAwesomeIcon icon={faCalendarAlt} className="text-4xl h-8 w-12" />
+                <p className="text-myblack">Community Events: Participate in exciting workshops, book clubs, and author talks.</p>
               </div>
             </div>
           </div>
