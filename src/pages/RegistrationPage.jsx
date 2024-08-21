@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import logo from "../assets/logo.png";
+import Logo from "../assets/logo/Logo";
 import { db, auth } from "../../firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const RegistrationPage = () => {
-  const courses = ["Course 1", "Course 2", "Course 3"]; // Example courses
-  const slots = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]; // Example slots
+  const courses = ["Hall - 1", "Hall - 2", "Hall - 3", "Hall - 4", "Hall - 5"]; // Example courses
+  const slots = ["10", "20", "30", "40", "50", "60", "70", "80", "90"]; // Example slots
 
   const [formData, setFormData] = useState({
     name: "",
@@ -218,13 +218,10 @@ const RegistrationPage = () => {
   return (
     <div className="flex justify-center items-center w-screen">
       <div className="bg-white p-8 rounded-lg w-full h-full flex flex-col justify-center">
-        <div className="flex justify-center py-4">
-          <img
-            src={logo}
-            alt="Logo"
-            className="w-20 sm:w-24 md:w-28 lg:w-32 xl:w-36"
-          />
+         <div className="bg-white rounded-lg w-full h-full flex flex-col items-center">
+        <Logo width="50" height="50" fill="#FF5733" />
         </div>
+      
         <h1 className="text-2xl font-bold mb-4 md:mb-8 text-center">
           Registration here
         </h1>
@@ -238,7 +235,7 @@ const RegistrationPage = () => {
                 placeholder="Name"
                 value={formData.name}
                 onChange={handleInputChange}
-                className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#F68B33]"
+                className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2]"
               />
               <span className="text-red-600">{errors.name}</span>
             </div>
@@ -254,7 +251,7 @@ const RegistrationPage = () => {
                   placeholder="Email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#F68B33]"
+                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2]"
                 />
                 <span className="text-red-600">{errors.email}</span>
               </div>
@@ -268,7 +265,7 @@ const RegistrationPage = () => {
                   placeholder="Phone Number"
                   value={formData.phoneNumber}
                   onChange={handlePhoneNumberChange}
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#F68B33]"
+                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2]"
                 />
                 <span className="text-red-600">{errors.phoneNumber}</span>
               </div>
@@ -279,15 +276,15 @@ const RegistrationPage = () => {
               {/* Decreased gap between Select Slots and Address */}
               <div className="flex flex-col mb-6 sm:mb-0 flex-1">
                 <label className="mb-1 font-semibold text-gray-400">
-                  Select Courses
+                  Hall Name
                 </label>
                 <select
                   id="course"
                   value={formData.course}
                   onChange={handleCourseChange}
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#F68B33]"
+                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2]"
                 >
-                  <option value="">Select a course</option>
+                  <option value="">Select Hall</option>
                   {courses.map((course, index) => (
                     <option key={index} value={course}>
                       {course}
@@ -298,7 +295,7 @@ const RegistrationPage = () => {
                   {formData.selectedCourses.map((course, index) => (
                     <div
                       key={index}
-                      className="flex items-center bg-[#F68B33] text-white rounded-full py-1 px-4 border-b border-gray-200 mb-2"
+                      className="flex items-center bg-[#42c4e2] text-white rounded-full py-1 px-4 border-b border-gray-200 mb-2"
                     >
                       <span className="mr-2">{course}</span>
                       <button
@@ -315,24 +312,24 @@ const RegistrationPage = () => {
               </div>
               <div className="flex flex-col mb-6 sm:mb-0 flex-1">
                 <label className="mb-1 font-semibold text-gray-400">
-                  Select Slots
+                  Select Chair
                 </label>
                 <select
                   id="slot"
                   value={formData.slot}
                   onChange={handleSlotChange}
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#F68B33]"
+                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2]"
                 >
-                  <option value="">Number of slots</option>
+                  <option value="">Number of Chairs</option>
                   {slots.map((slot, index) => (
                     <option key={index} value={slot}>
-                      Slot {slot}
+                      Chair - {slot}
                     </option>
                   ))}
                 </select>
                 <div className="mt-2 flex flex-wrap gap-4">
                   {formData.slot && (
-                    <div className="flex justify-between items-center bg-[#F68B33] text-white rounded-full px-4 py-2">
+                    <div className="flex justify-between items-center bg-[#42c4e2] text-white rounded-full px-4 py-2">
                       <span className="mr-2">Slot {formData.slot}</span>
                       <button
                         type="button"
@@ -359,7 +356,7 @@ const RegistrationPage = () => {
                   placeholder="Address"
                   value={formData.address}
                   onChange={handleInputChange}
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#F68B33]"
+                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2]"
                 />
                 <span className="text-red-600">{errors.address}</span>
               </div>
@@ -373,7 +370,7 @@ const RegistrationPage = () => {
                   placeholder="Pin Code"
                   value={formData.pinCode}
                   onChange={handleInputChange}
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#F68B33]"
+                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2]"
                 />
                 <span className="text-red-600">{errors.pinCode}</span>
               </div>
@@ -389,7 +386,7 @@ const RegistrationPage = () => {
                   placeholder="District"
                   value={formData.district}
                   onChange={handleInputChange}
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#F68B33]"
+                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2]"
                 />
                 <span className="text-red-600">{errors.district}</span>
               </div>
@@ -403,7 +400,7 @@ const RegistrationPage = () => {
                   placeholder="State"
                   value={formData.state}
                   onChange={handleInputChange}
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#F68B33]"
+                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2]"
                 />
                 <span className="text-red-600">{errors.state}</span>
               </div>
@@ -420,7 +417,7 @@ const RegistrationPage = () => {
                   placeholder="Password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#F68B33]"
+                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2]"
                 />
                 <span className="text-red-600">{errors.password}</span>
               </div>
@@ -435,7 +432,7 @@ const RegistrationPage = () => {
                   placeholder="Confirm Password"
                   value={formData.confirmPassword}
                   onChange={handleInputChange}
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#F68B33]"
+                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2]"
                 />
                 <span className="text-red-600">{errors.confirmPassword}</span>
               </div>
@@ -462,7 +459,7 @@ const RegistrationPage = () => {
             <a href="/payment" >
               <button
                 type="submit" // Changed from submit to button
-                className="bg-[#F68B33] text-white px-4 py-2 rounded-md w-full hover:bg-[#e67e22] transition duration-300"
+                className="bg-[#42c4e2] text-white px-4 py-2 rounded-md w-full hover:bg-[#ffc61a] transition duration-300"
               >
                 Pay Now
               </button>
