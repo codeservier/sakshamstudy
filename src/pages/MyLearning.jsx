@@ -96,7 +96,7 @@ const MyLearning = () => {
               ref={coursesRef}
               className="text-2xl font-medium text-[#800020] mb-4"
             >
-              Our Courses
+              Our Faclities
             </h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {coursesData.map((card, index) => (
