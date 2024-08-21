@@ -4,7 +4,7 @@ import SingleBanner from "../components/banner/SingleBanner";
 import ContunueWatching from "./ContunueWatching";
 import { Upcoming } from "../components/banner/Upcoming";
 import StudentsReviews from "../components/StudentsReviews";
-import TopInstructor from "../components/TopInstructor";
+import TopInstructor from "../components/Testimonials";
 import Toppicks from "../components/Toppicks";
 import Banner from "../components/banner/Banner";
 import Loader from "../components/loader/Loader";

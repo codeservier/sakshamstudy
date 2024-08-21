@@ -42,7 +42,7 @@ const   Toppicks = () => {
 
   return (
     <div className="container mx-auto p-4 my-4">
-      <h1 className="text-2xl font-medium text-[#800020] mb-4">Our Courses</h1>
+      <h1 className="text-2xl font-medium text-[#800020] mb-4">Facilities</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
         {cardsData.map((card, index) => (
           <Card
