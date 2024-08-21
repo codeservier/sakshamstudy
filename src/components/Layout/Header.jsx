@@ -5,6 +5,7 @@ import { FaCartPlus, FaRegHeart } from "react-icons/fa";
 import NavLinks from "./Navlinks";
 import { Link, useNavigate } from "react-router-dom";
 import cross from '../../assets/download.png'
+import Logo from "../../assets/logo/Logo";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,13 +18,8 @@ const Header = () => {
     <header className="fixed top-0 z-50 w-full px-6 py-3 font-medium text-black bg-white shadow-md lg:px-14">
       <div className="container flex items-center justify-between mx-auto">
         {/* <div className="text-lg font-bold h-[80px] w-[80px] rounded-[40px] border border-black"> */}
-          <Link to="/">
-            <img
-              src={logo}
-              alt="Logo"
-              className="bg-cover h-[70px] w-[250px] "
-            />
-          </Link>
+        <Logo width="50" height="50" fill="#FF5733" />
+
         {/* </div> */}
 
         <nav className="items-center hidden space-x-12 font-bold md:flex">

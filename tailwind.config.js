@@ -4,13 +4,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#800020",
-        secondary: "#F68B33",
-        white: "#FFFFFF",
+        primary: "#42c4e3",
+        secondary: "#ffc61a",
+        mywhite: "#ffffff",
+        myblack:"#1d264d"
       },
       fontFamily: {
         sans: ["'Open Sans'"],
-      },
+      },  
     },
   },
   plugins: [],

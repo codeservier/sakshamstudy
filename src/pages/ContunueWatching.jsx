@@ -1,10 +1,10 @@
 import React from "react";
-import image1 from "../assets/courses/Course.png";
-import image2 from "../assets/courses/Course.png";
-import image3 from "../assets/courses/Course.png";
-import image4 from "../assets/courses/Course.png";
-import image5 from "../assets/courses/Course.png";
-import image6 from "../assets/courses/Course.png";
+import image1 from "../assets/libraries/1.png";
+import image2 from "../assets/libraries/2.png";
+import image3 from "../assets/libraries/3.png";
+import image4 from "../assets/libraries/4.png";
+import image5 from "../assets/libraries/5.png";
+import image6 from "../assets/libraries/6.png";
 
 import Card from "../components/card/Card";
 import { useNavigate, useParams } from "react-router-dom";
@@ -57,10 +57,10 @@ const ContinueWatching = () => {
   };
   return (
     <div className="container mx-auto p-4 my-4">
-      <h1 className="text-2xl font-medium text-[#800020] text-400  mb-4">
-        Popular Courses
+      <h1 className="text-2xl font-medium text-myblack text-400  mb-4">
+        Popular Library
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20">
         {cardsData.map((card, index) => (
           <Card
             key={index}

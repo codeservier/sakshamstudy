@@ -8,6 +8,8 @@ import TopInstructor from "../components/TopInstructor";
 import Toppicks from "../components/Toppicks";
 import Banner from "../components/banner/Banner";
 import Loader from "../components/loader/Loader";
+import OurServices from "./OurServices";
+import Other from "./Other";
 export const HomePage = () => {
   const [loading, setLoading] = useState(true);
 
@@ -27,6 +29,12 @@ export const HomePage = () => {
           </div>
           <div className="max-w-screen-xl mx-auto px-6">
             <SingleBanner  />
+          </div>
+          <div className="max-w-screen-xl mx-auto px-6">
+            <OurServices/>  
+          </div>
+          <div className="max-w-screen-xl mx-auto px-6">
+            <Other/>  
           </div>
           <div className="max-w-screen-xl mx-auto px-6 ">
             <Upcoming />
