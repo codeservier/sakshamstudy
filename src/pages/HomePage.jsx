@@ -21,21 +21,23 @@ export const HomePage = () => {
         </div>
       ) : (
         <>
-          <div className="max-w-screen mx-auto px-1   " >
+          <div className="max-w-screen mx-auto bg-white shadow-lg rounded-lg group cursor-pointer ">
             <Banner />
           </div>
+
           <div className="max-w-screen-xl mx-auto px-2 ">
             <ContunueWatching />
           </div>
           <div className="max-w-screen-xl mx-auto px-6">
-            <SingleBanner  />
+            <SingleBanner />
           </div>
           <div className="max-w-screen-xl mx-auto px-6">
-            <OurServices/>  
+            <OurServices />
           </div>
           <div className="max-w-screen-xl mx-auto px-6">
-            <Other/>  
+            <Other />
           </div>
+          
           <div className="max-w-screen-xl mx-auto px-6 ">
             <Upcoming />
           </div>

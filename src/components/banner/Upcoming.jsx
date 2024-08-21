@@ -29,46 +29,46 @@ export const Upcoming = () => {
         Future Libraries
       </h1>
       <Slider {...settings}>
-        <div className="h-400 w-full object-cover">
+        <div className="h-400 w-full object-cover bg-white shadow-lg rounded-lg group cursor-pointer ">
           <img
             src={image1}
             alt="Slide 1"
-            className="h-400 w-full object-cover"
+            className="h-400 w-full object-cover bg-white shadow-lg rounded-lg group cursor-pointer "
           />
         </div>
-        <div className="h-400 w-full object-cover">
+        <div className="h-400 w-full object-cover bg-white shadow-lg rounded-lg group cursor-pointer ">
           <img
             src={image2}
             alt="Slide 2"
-            className="h-400 w-full object-cover"
+            className="h-400 w-full object-cover bg-white shadow-lg rounded-lg group cursor-pointer "
           />
         </div>
-        <div className="h-500 w-full object-cover">
+        <div className="h-500 w-full object-cover bg-white shadow-lg rounded-lg group cursor-pointer ">
           <img
             src={image3}
             alt="Slide 3"
-            className="h-400 w-full object-cover"
+            className="h-400 w-full object-cover bg-white shadow-lg rounded-lg group cursor-pointer "
           />
         </div>
-        <div className="h-400 w-full object-cover">
+        <div className="h-400 w-full object-cover bg-white shadow-lg rounded-lg group cursor-pointer  ">
           <img
             src={image4}
             alt="Slide 4"
-            className="h-400 w-full object-cover"
+            className="h-400 w-full object-cover bg-white shadow-lg rounded-lg group cursor-pointer "
           />
         </div>
-        <div className="h-400 w-full object-cover">
+        <div className="h-400 w-full object-cover bg-white shadow-lg rounded-lg group cursor-pointer ">
           <img
             src={image5}
             alt="Slide 5"
-            className="h-400 w-full object-cover"
+            className="h-400 w-full object-cover bg-white shadow-lg rounded-lg group cursor-pointer "
           />
         </div>
-        <div className="h-400 w-full object-cover">
+        <div className="h-400 w-full object-cover bg-white shadow-lg rounded-lg group cursor-pointer  ">
           <img
             src={image6}
             alt="Slide 6"
-            className="h-400 w-full object-cover"
+            className="h-400 w-full object-cover bg-white shadow-lg rounded-lg group cursor-pointer "
           />
         </div>
       </Slider>

@@ -9,14 +9,14 @@ const TermCondition = () => {
         <section className="mb-6">
           <h2 className="text-2xl font-semibold mb-4">1. Introduction</h2>
           <p>
-            Welcome to Pragati Coaching Classes. By accessing or using our services, you agree to comply with and be bound by the following terms and conditions. If you do not agree with these terms, please do not use our services.
+            Welcome to Saksham Coaching Classes. By accessing or using our services, you agree to comply with and be bound by the following terms and conditions. If you do not agree with these terms, please do not use our services.
           </p>
         </section>
 
         <section className="mb-6">
           <h2 className="text-2xl font-semibold mb-4">2. Services</h2>
           <p>
-            Pragati Coaching Classes provides various educational services, including coaching and training for different subjects and courses. Our services are subject to availability and may change from time to time.
+            Saksham Coaching Classes provides various educational services, including coaching and training for different subjects and courses. Our services are subject to availability and may change from time to time.
           </p>
         </section>
 
@@ -29,9 +29,9 @@ const TermCondition = () => {
 
         <section className="mb-6">
           <h2 className="text-2xl font-semibold mb-4">4. Payment and Refunds</h2>
-          <mp>
+          <p>
             Payment for our services must be made as specified on our website. Refunds, if applicable, will be processed according to our refund policy, which is available on our website.
-          </mp>
+          </p>
         </section>
 
         <section className="mb-6">
@@ -44,7 +44,7 @@ const TermCondition = () => {
         <section className="mb-6">
           <h2 className="text-2xl font-semibold mb-4">6. Contact Us</h2>
           <p>
-            If you have any questions about these terms and conditions, please contact us at support@pragaticoachingclasses.com.
+            If you have any questions about these terms and conditions, please contact us at support@sakshamcoachingclasses.com.
           </p>
         </section>
       </div>

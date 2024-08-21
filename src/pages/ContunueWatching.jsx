@@ -12,46 +12,51 @@ import { useNavigate, useParams } from "react-router-dom";
 const ContinueWatching = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const cardsData = [
+  const cardsData =  [
     {
       id: 1,
-      title: "SSC CGL",
+      title: "Pratham Library",
       description:
-        "Focused training for SSC CGL, including Quantitative Aptitude, Reasoning, English, and General Awareness.",
+        "Focused collection of resources for SSC CGL, including Quantitative Aptitude, Reasoning, English, and General Awareness.",
       image: image1,
     },
     {
       id: 2,
-      title: "Bank PO",
-      description: "Preparation for Bank PO exams with focus on Quant, Reasoning, English, and General Awareness.",
+      title: "Rishi Library",
+      description: 
+        "Comprehensive collection for Bank PO exam preparation with a focus on Quant, Reasoning, English, and General Awareness.",
       image: image2,
     },
     {
       id: 3,
-      title: "NDA/CDS",
-      description: "Coaching for Defence Services exams, covering Maths, General Ability, and English.",
+      title: "Anchal Library",
+      description: 
+        "Extensive resources for Defence Services exams like NDA/CDS, covering Maths, General Ability, and English.",
       image: image3,
     },
     {
       id: 4,
-      title: "TET",
+      title: "Aman Library",
       description:
-        "Preparation for Teacher Eligibility Test, focusing on pedagogy, languages, and subject-specific content.",
+        "Dedicated collection for Teacher Eligibility Test preparation, focusing on pedagogy, languages, and subject-specific content.",
       image: image4,
     },
     {
       id: 5,
-      title: "RBI Grade B",
-      description: "Focused preparation for RBI Grade B, covering Economics, Finance, and general aptitude.",
+      title: "CodeServir Library",
+      description: 
+        "Specialized resources for RBI Grade B exam preparation, covering Economics, Finance, and general aptitude.",
       image: image5,
     },
     {
       id: 6,
-      title: "RRB NTPC ",
-      description: "Training for RRB NTPC with emphasis on General Awareness, Arithmetic, and Reasoning.",
+      title: "Arpit Library",
+      description: 
+        "Curated resources for RRB NTPC exam preparation with emphasis on General Awareness, Arithmetic, and Reasoning.",
       image: image6,
     },
   ];
+  
   const handleCardClick = (id) => {
     navigate(`/coursedetail`);
   };
