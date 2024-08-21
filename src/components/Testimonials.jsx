@@ -1,4 +1,3 @@
-// src/components/TopInstructor.jsx
 import React from "react";
 import Slider from "react-slick";
 import image1 from "../assets/sk.png";
@@ -42,6 +41,7 @@ const libraryData = [
     image: image6,
   },
 ];
+
 // Slider settings
 const sliderSettings = {
   dots: true,
@@ -51,17 +51,19 @@ const sliderSettings = {
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 3000,
+  centerMode: true,
+  centerPadding: '20px', // Adjust padding for responsiveness
 };
 
 const Testimonials = () => {
   return (
-    <div className="container mx-auto p-4 my-4">
-      <h1 className="text-2xl font-medium text-[#800020] mb-4 text-center">
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-2xl sm:text-3xl font-medium mb-8 text-center">
         Testimonials
       </h1>
-      <Slider {...sliderSettings} className="">
+      <Slider {...sliderSettings} className="relative">
         {libraryData.map((card, index) => (
-          <div key={index} className="flex justify-center">
+          <div key={index} className="flex justify-center px-2">
             <TopInstructorCard
               title={card.title}
               description={card.description}
