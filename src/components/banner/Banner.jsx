@@ -4,12 +4,12 @@ import React from "react";
 import Slider from "react-slick";
 
 // Import images
-import image1 from "../../assets/1.png";
-import image2 from "../../assets/2.png";
-import image3 from "../../assets/3.png";
-import image4 from "../../assets/4.png";
-import image5 from "../../assets/1.png";
-import image6 from "../../assets/2.png";
+import image1 from "../../assets/1.1.png";
+import image2 from "../../assets/1.2.png";
+import image3 from "../../assets/1.3.png";
+import image4 from "../../assets/1.4.png";
+import image5 from "../../assets/1.1.png";
+import image6 from "../../assets/1.2.png";
 
 const Banner = () => {
   var settings = {
