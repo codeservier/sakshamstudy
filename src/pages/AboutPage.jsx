@@ -47,16 +47,16 @@ const AboutPage = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 ">
                 <div className="py-12 pr-8">
                   <h1 className="text-4xl mb-5 font-sans">
-                    About Pragati Coaching Classes
+                    About 
                   </h1>
                   <p className="text-[#000] font-normal text-xl ">
-                    Pragati Coaching Classes is dedicated to empowering students
+                    Saksham Study is dedicated to empowering students
                     to achieve academic excellence and personal growth. With a
                     team of experienced educators and a student-centric
                     approach, we provide comprehensive coaching that covers
                     every aspect of learning. Our goal is to help students build
                     a strong foundation, excel in their studies, and develop the
-                    skills needed for lifelong success. At Pragati, we believe
+                    skills needed for lifelong success. At Saksham, we believe
                     in nurturing potential and guiding each student on their
                     path to success.
                   </p>
@@ -140,7 +140,7 @@ const AboutPage = () => {
                   Our Vision
                   </h1>
                   <p className="text-[#000] font-normal text-xl ">
-                  Pragati Coaching Classes is to be a leading educational institution that transforms lives through quality education. We aspire to create a nurturing environment where every student is inspired to achieve academic excellence, develop a passion for lifelong learning, and become a confident, responsible, and successful individual. We aim to empower our students to not only excel in their studies but also to contribute positively to society, shaping a brighter future for themselves and the world.
+                  Saksham Study aims to be a leading educational institution that transforms lives through quality education. We aspire to create a nurturing environment where every student is inspired to achieve academic excellence, develop a passion for lifelong learning, and become a confident, responsible, and successful individual. We aim to empower our students to not only excel in their studies but also to contribute positively to society, shaping a brighter future for themselves and the world.
                   </p>
                 </div>
                 <div className="flex justify-center items-center">

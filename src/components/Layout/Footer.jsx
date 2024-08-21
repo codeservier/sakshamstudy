@@ -67,13 +67,13 @@ const Footer = () => {
             <li className="text-gray-400">Email: pccbeniganj@gmail.com</li>
             <li className="text-gray-400">Phone: +91 9876543210</li>
             <li className="text-gray-400">
-              Address: Beniganj Hardoi
+              Address: Hargaon Teerath
             </li>
           </ul>
         </div>
       </div>
       <div className="text-center mt-8">
-        <p>&copy; 2024 Pragati Coaching Class </p>
+        <p>&copy; 2024 Saksham Study </p>
       </div>
     </footer>
   );

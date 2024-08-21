@@ -22,7 +22,7 @@ app.post("/register", (req, res) => {
   const mailOptions = {
     from: 'amancodeservir@gmail.com', // sender address
     to: email, // receiver's email
-    subject: 'Welcome to Pragati Coaching Classes',
+    subject: 'Welcome to saksham study',
     text: `Thank you for registering. Your user ID is ${userId}.`,
   };
 

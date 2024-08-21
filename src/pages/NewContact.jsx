@@ -121,12 +121,12 @@ const NewContact = () => {
                     will get back to you within 24 hours.
                   </p>
                   <p className="mb-2 text-blue-600">
-                    <a href="mailto:pccbeniganj@gmail.com">
-                      pccbeniganj@gmail.com
+                    <a href="mailto: sakshamstudy@gmail.com">
+                       sakshamstudy@gmail.com
                     </a>
                   </p>
                   <p className="text-gray-800">
-                    <a href="tel:+916361388292">+91 9876543210</a>
+                    <a href="tel:+916361388292">+91 9454310605</a>
                   </p>
                 </div>
                 <SingleBanner image={mission} />

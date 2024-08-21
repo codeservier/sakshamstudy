@@ -31,7 +31,7 @@ export default function Sidebar() {
       {/* Sidebar Logo and Title */}
       <div className="flex items-center gap-2 px-1 py-3">
         <FcBullish fontSize={24} />
-        {isOpen && <span className="text-neutral-200 text-lg">Pragati Admin</span>}
+        {isOpen && <span className="text-neutral-200 text-lg">saksham\ Admin</span>}
       </div>
 
       {/* Sidebar Links */}
