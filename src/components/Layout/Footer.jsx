@@ -14,23 +14,23 @@ const Footer = () => {
           <h3 className="font-semibold mb-2">Quick Links</h3>
           <ul className="space-y-2">
             <li>
-              <a href="#" className="text-gray-400 hover:underline">
+              <a href="/" className="text-gray-400 hover:underline">
                 Home
               </a>
             </li>
             <li>
-              <a href="#" className="text-gray-400 hover:underline">
+              <a href="/mylearning" className="text-gray-400 hover:underline">
                 Courses
               </a>
             </li>
             <li>
-              <a href="#" className="text-gray-400 hover:underline">
-                About
+              <a href="/about" className="text-gray-400 hover:underline">
+                About Us
               </a>
-            </li>
+            </li> 
             <li>
-              <a href="#" className="text-gray-400 hover:underline">
-                Contact
+              <a href="/new-contact" className="text-gray-400 hover:underline">
+                Contact Us
               </a>
             </li>
           </ul>
@@ -39,22 +39,22 @@ const Footer = () => {
           <h3 className="font-semibold mb-2">Resources</h3>
           <ul className="space-y-2">
             <li>
-              <a href="#" className="text-gray-400 hover:underline">
+              <a href="*" className="text-gray-400 hover:underline">
                 Blog
               </a>
             </li>
             <li>
-              <a href="#" className="text-gray-400 hover:underline">
+              <a href="*" className="text-gray-400 hover:underline">
                 Help Center
               </a>
             </li>
             <li>
-              <a href="#" className="text-gray-400 hover:underline">
+              <a href="*" className="text-gray-400 hover:underline">
                 Privacy Policy
               </a>
             </li>
             <li>
-              <a href="#" className="text-gray-400 hover:underline">
+              <a href="/terms-and-conditions" className="text-gray-400 hover:underline">
                 Terms of Service
               </a>
             </li>
