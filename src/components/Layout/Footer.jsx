@@ -17,23 +17,23 @@ const Footer = () => {
           <h3 className="font-semibold mb-2 text-mywhite">Quick Links</h3>
           <ul className="space-y-2">
             <li>
-              <a href="#" className="text-gray-400 hover:underline">
+              <a href="/" className="text-gray-400 hover:underline">
                 Home
               </a>
             </li>
             <li>
-              <a href="#" className="text-gray-400 hover:underline">
+              <a href="/mylearning" className="text-gray-400 hover:underline">
                 Courses
               </a>
             </li>
             <li>
-              <a href="#" className="text-gray-400 hover:underline">
-                About
+              <a href="/about" className="text-gray-400 hover:underline">
+                About Us
               </a>
-            </li>
+            </li> 
             <li>
-              <a href="#" className="text-gray-400 hover:underline">
-                Contact
+              <a href="/new-contact" className="text-gray-400 hover:underline">
+                Contact Us
               </a>
             </li>
           </ul>
@@ -42,35 +42,33 @@ const Footer = () => {
           <h3 className="font-semibold text-mywhite mb-2">Resources</h3>
           <ul  className="space-y-2">
             <li>
-              <a href="#" className="text-gray-400 hover:underline">
+              <a href="*" className="text-gray-400 hover:underline">
                 Blog
               </a>
             </li>
             <li>
-              <a href="#" className="text-gray-400 hover:underline">
+              <a href="*" className="text-gray-400 hover:underline">
                 Help Center
               </a>
             </li>
             <li>
-              <a href="#" className="text-gray-400 hover:underline">
+              <a href="*" className="text-gray-400 hover:underline">
                 Privacy Policy
               </a>
             </li>
             <li>
-              <a href="#" className="text-gray-400 hover:underline">
+              <a href="/terms-and-conditions" className="text-gray-400 hover:underline">
                 Terms of Service
               </a>
             </li>
           </ul>
         </div>
         <div>
-          <h3 className="font-semibold mb-2 text-mywhite">Contact Us </h3>
-          <ul  className="space-y-2">
-            <li className="text-gray-400">Email: pccbeniganj@gmail.com</li>
-            <li className="text-gray-400">Phone: +91 9876543210</li>
-            <li className="text-gray-400">
-              Address: Hargaon Teerath
-            </li>
+          <h3 className="font-semibold mb-2 text-white">Contact Us</h3>
+          <ul className="space-y-2">
+            <li className="text-gray-400">Email: sakshamstudy@gmail.com</li>
+            <li className="text-gray-400">Phone: +91 9454310605</li>
+            <li className="text-gray-400">Address: Hargaon Teerath</li>
           </ul>
         </div>
       </div>

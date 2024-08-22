@@ -21,6 +21,7 @@ import CartPage from "../CartPage";
 import Checkout from "./Checkout";
 import NewContact from "../NewContact";
 import FaqPage from "../FaqPage"; 
+import TermCondition from "../TermCondition";
 
 const AppRoutes = () => {
   return (
@@ -43,6 +44,7 @@ const AppRoutes = () => {
           <Route path="/lecture" element={<LecturePage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<Checkout />} />
+           <Route path="/terms-and-conditions" element={<TermCondition />} />
           <Route path="/faq" element={<FaqPage />} /> {/* Ensure this path is correct */}
           <Route path="*" element={<PageNotFound />} />
           {/* <Route path="/admin" element={<AdminPanel />} /> */}

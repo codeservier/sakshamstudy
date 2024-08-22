@@ -446,6 +446,7 @@ const RegistrationPage = () => {
         </form>
       </div>
     </div>
+
   );
 };
 
