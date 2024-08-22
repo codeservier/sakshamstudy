@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Logo from "../assets/logo/Logo";
 import { db, auth } from "../../firebase";
-import { addDoc, collection } from "firebase/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import CustomInput from "../components/customInput/CustomInput.jsx"; // Import CustomInput
 
 const RegistrationPage = () => {
   const courses = ["Hall - 1", "Hall - 2", "Hall - 3", "Hall - 4", "Hall - 5"]; // Example courses
@@ -29,8 +29,7 @@ const RegistrationPage = () => {
   const [slotError, setSlotError] = useState("");
   const [isPaymentComplete, setIsPaymentComplete] = useState(false); // Track payment status
 
-  // For slot selection error
-
+  // For input change
   const handleInputChange = (e) => {
     const { id, value, type, checked } = e.target;
     setFormData((prevData) => ({
@@ -219,182 +218,234 @@ const RegistrationPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center ">
-  <div className="bg-white p-12 rounded-lg w-full  flex flex-col justify-center">
-    <div className="flex justify-center mb-6">
-      <Logo width="50" height="50" fill="#FF5733" />
-    </div>
-
-    <h1 className="text-2xl font-bold mb-4 text-center">
-      Registration here
-    </h1>
-    <form className="space-y-6" onSubmit={handleOnSubmit}>
-      <div className="flex flex-col space-y-4">
-        <div className="flex flex-col">
-          <label htmlFor="name" className="mb-1 font-semibold text-gray-400">Name</label>
-          <input
-            id="name"
-            type="text"
-            placeholder="Name"
-            value={formData.name}
-            onChange={handleInputChange}
-            className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2] w-full"
-          />
-          <span className="text-red-600">{errors.name}</span>
+    <div className="flex max-w-screen-xl mx-auto justify-center items-center p-4">
+      <div className="bg-white p-8 rounded-lg w-full flex flex-col">
+        <div className="flex justify-center mb-4">
+          <Logo width="50" height="50" fill="#FF5733" />
         </div>
 
-        <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
-          <div className="flex flex-col flex-1">
-            <label htmlFor="email" className="mb-1 font-semibold text-gray-400">Email</label>
-            <input
-              id="email"
-              type="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleInputChange}
-              className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2] w-full"
-            />
-            <span className="text-red-600">{errors.email}</span>
-          </div>
-          <div className="flex flex-col flex-1">
-            <label htmlFor="phoneNumber" className="mb-1 font-semibold text-gray-400">Phone Number</label>
-            <input
-              id="phoneNumber"
-              type="text"
-              placeholder="Phone Number"
-              value={formData.phoneNumber}
-              onChange={handlePhoneNumberChange}
-              className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2] w-full"
-            />
-            <span className="text-red-600">{errors.phoneNumber}</span>
-          </div>
-        </div>
+        <h1 className="text-2xl font-bold text-center">
+          Registration Here
+        </h1>
 
-        <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
-          <div className="flex flex-col flex-1">
-            <label htmlFor="course" className="mb-1 font-semibold text-gray-400">Hall Name</label>
-            <select
-              id="course"
-              value={formData.course}
-              onChange={handleCourseChange}
-              className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2] w-full"
-            >
-              <option value="">Select Hall</option>
-              {courses.map((course, index) => (
-                <option key={index} value={course}>
-                  {course}
-                </option>
-              ))}
-            </select>
-            <div className="mt-2 flex flex-wrap gap-2">
-              {formData.selectedCourses.map((course, index) => (
-                <div
-                  key={index}
-                  className="flex items-center bg-[#42c4e2] text-white rounded-full py-1 px-4 border-b border-gray-200 mb-2"
+        <form onSubmit={handleOnSubmit}   >
+          {/* Basic Details */}
+            <h2 className="text-xl font-semibold text-left mb-4">
+              Basic Details
+            </h2>
+          <section className="mb-6  ">
+            <div className="space-y-4 md:space-y-0 md:flex md:gap-4 flex justify-between">
+              <CustomInput
+                id="name"
+                type="text"
+                placeholder="Name"
+                value={formData.name}
+                onChange={handleInputChange}
+                error={errors.name}
+                label="Name"
+              />
+              <CustomInput
+                id="email"
+                type="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleInputChange}
+                error={errors.email}
+                label="Email"
+              />
+              <CustomInput
+                id="phoneNumber"
+                type="text"
+                placeholder="Phone Number"
+                value={formData.phoneNumber}
+                onChange={handlePhoneNumberChange}
+                error={errors.phoneNumber}
+                label="Phone Number"
+              />
+            </div>
+          </section>
+
+          {/* Library Related Details */}
+          <section className="mb-6">
+            <h2 className="text-xl font-semibold mb-4">
+              Library Related Details
+            </h2>
+            <div className="space-y-4 md:space-y-0 md:flex md:gap-4">
+              <div className="flex flex-col flex-1">
+                <label className="mb-1 font-semibold text-gray-400">
+                  Hall Name
+                </label>
+                <select
+                  id="course"
+                  value={formData.course}
+                  onChange={handleCourseChange}
+                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2]"
                 >
-                  <span className="mr-2">{course}</span>
-                  <button
-                    type="button"
-                    onClick={() => removeCourse(course)}
-                    className="text-white text-xl"
-                  >
-                    &#10005;
-                  </button>
+                  <option value="">Select Hall</option>
+                  {courses.map((course, index) => (
+                    <option key={index} value={course}>
+                      {course}
+                    </option>
+                  ))}
+                </select>
+                <div className="mt-2 flex flex-wrap gap-4">
+                  {formData.selectedCourses.map((course, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center bg-[#42c4e2] text-white rounded-full py-1 px-4 border-b border-gray-200 mb-2"
+                    >
+                      <span className="mr-2">{course}</span>
+                      <button
+                        type="button"
+                        onClick={() => removeCourse(course)}
+                        className="text-white text-xl"
+                      >
+                        &#10005;
+                      </button>
+                    </div>
+                  ))}
+                  <span className="text-red-600">{courseError}</span>
                 </div>
-              ))}
-              <span className="text-red-600">{courseError}</span>
-            </div>
-          </div>
-
-          <div className="flex flex-col flex-1">
-            <label htmlFor="slot" className="mb-1 font-semibold text-gray-400">Select Chair</label>
-            <select
-              id="slot"
-              value={formData.slot}
-              onChange={handleSlotChange}
-              className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2] w-full"
-            >
-              <option value="">Number of Chairs</option>
-              {slots.map((slot, index) => (
-                <option key={index} value={slot}>
-                  Chair - {slot}
-                </option>
-              ))}
-            </select>
-            <div className="mt-2 flex flex-wrap gap-2">
-              {formData.slot && (
-                <div className="flex justify-between items-center bg-[#42c4e2] text-white rounded-full px-4 py-2">
-                  <span className="mr-2">Slot {formData.slot}</span>
-                  <button
-                    type="button"
-                    onClick={() => removeSlot()}
-                    className="text-white text-xl"
-                  >
-                    &#10005;
-                  </button>
+              </div>
+              <div className="flex flex-col flex-1">
+                <label className="mb-1 font-semibold text-gray-400">
+                  Select Chair
+                </label>
+                <select
+                  id="slot"
+                  value={formData.slot}
+                  onChange={handleSlotChange}
+                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2]"
+                >
+                  <option value="">Number of Chairs</option>
+                  {slots.map((slot, index) => (
+                    <option key={index} value={slot}>
+                      Chair - {slot}
+                    </option>
+                  ))}
+                </select>
+                <div className="mt-2 flex flex-wrap gap-4">
+                  {formData.selectedSlots.map((slot, index) => (
+                    <div
+                      key={index}
+                      className="flex justify-between items-center bg-[#42c4e2] text-white rounded-full px-4 py-2"
+                    >
+                      <span className="mr-2">Slot {slot}</span>
+                      <button
+                        type="button"
+                        onClick={() => removeSlot(slot)}
+                        className="text-white text-xl"
+                      >
+                        &#10005;
+                      </button>
+                    </div>
+                  ))}
+                  <span className="text-red-600">{slotError}</span>
                 </div>
-              )}
-              <span className="text-red-600">{slotError}</span>
+              </div>
             </div>
-          </div>
-        </div>
+          </section>
 
-        <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
-          <div className="flex flex-col flex-1">
-            <label htmlFor="address" className="mb-1 font-semibold text-gray-400">Address</label>
-            <input
-              id="address"
-              type="text"
-              placeholder="Address"
-              value={formData.address}
-              onChange={handleInputChange}
-              className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2] w-full"
-            />
-            <span className="text-red-600">{errors.address}</span>
-          </div>
-          <div className="flex flex-col flex-1">
-            <label htmlFor="pinCode" className="mb-1 font-semibold text-gray-400">Pin Code</label>
-            <input
-              id="pinCode"
-              type="text"
-              placeholder="Pin Code"
-              value={formData.pinCode}
-              onChange={handleInputChange}
-              className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2] w-full"
-            />
-            <span className="text-red-600">{errors.pinCode}</span>
-          </div>
-        </div>
+          {/* Address Details */}
+          <section className="mb-6">
+            <h2 className="text-xl font-semibold mb-4">Address Details</h2>
+            <div className="space-y-4">
+              <div className="md:flex md:gap-4">
+              <CustomInput
+                  id="district"
+                  type="text"
+                  placeholder="District"
+                  value={formData.district}
+                  onChange={handleInputChange}
+                  error={errors.district}
+                  label="District"
+                />
+                <CustomInput
+                  id="state"
+                  type="text"
+                  placeholder="State"
+                  value={formData.state}
+                  onChange={handleInputChange}
+                  error={errors.state}
+                  label="State"
+                />
+                <CustomInput
+                  id="pinCode"
+                  type="text"
+                  placeholder="Pin Code"
+                  value={formData.pinCode}
+                  onChange={handleInputChange}
+                  error={errors.pinCode}
+                  label="Pin Code"
+                />
+              </div>
+              <div className="md:flex md:gap-4">
+              <CustomInput
+                  id="address"
+                  type="text"
+                  placeholder="Address"
+                  value={formData.address}
+                  onChange={handleInputChange}
+                  error={errors.address}
+                  label="Address"
+                />
+               
+              </div>
+            </div>
+          </section>
 
-        <div className="flex flex-col space-y-4">
-          <div className="flex items-center">
-            <input
-              id="agreedToTerms"
-              type="checkbox"
-              checked={formData.agreedToTerms}
-              onChange={handleInputChange}
-              className="mr-2"
-            />
-            <label htmlFor="agreedToTerms" className="text-gray-600">
-              I agree to the{" "}
-              <a href="/terms-and-conditions" className="text-blue-600">
-                terms and conditions
-              </a>
-            </label>
-          </div>
-          <span className="text-red-600">{errors.terms}</span>
-        </div>
+          {/* Contact Details */}
+          <section className="">
+            <h2 className="text-xl font-semibold mb-4">Contact Details</h2>
+            <div className="space-y-4">
+              <div className="md:flex md:gap-4">
+                <CustomInput
+                  id="password"
+                  type="password"
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  error={errors.password}
+                  label="Password"
+                />
+                <CustomInput
+                  id="confirmPassword"
+                  type="password"
+                  placeholder="Confirm Password"
+                  value={formData.confirmPassword}
+                  onChange={handleInputChange}
+                  error={errors.confirmPassword}
+                  label="Confirm Password"
+                />
+              </div>
+              <div className="flex items-center">
+                <input
+                  id="agreedToTerms"
+                  type="checkbox"
+                  checked={formData.agreedToTerms}
+                  onChange={handleInputChange}
+                  className="mr-2"
+                />
+                <label htmlFor="agreedToTerms" className="text-gray-600">
+                  I agree to the{" "}
+                  <a href="/terms-and-conditions" className="text-blue-600">
+                    terms and conditions
+                  </a>
+                </label>
+                <span className="text-red-600 block mt-1">{errors.terms}</span>
+              </div>
+            </div>
+          </section>
 
-        <button
-          type="submit"
-          className="bg-[#42c4e2] text-white px-4 py-2 rounded-md w-full hover:bg-[#ffc61a] transition duration-300"
-        >
-          Pay Now
-        </button>
+          <button
+            type="submit"
+            className="bg-[#42c4e2] text-white px-4 py-2 rounded-md w-full hover:bg-[#ffc61a] transition duration-300"
+          >
+            Pay Now
+          </button>
+        </form>
       </div>
-    </form>
-  </div>
-</div>
+    </div>
 
   );
 };
