@@ -109,7 +109,7 @@ const NewContact = () => {
     <>
       <section className="bg-mywh  ">
         <div className="container p-4 mx-auto ">
-          <h1 className="text-4xl text-center font-extrabold text-primary   text-400 mb-8">
+          <h1 className="text-4xl text-center font-extrabold  text-primary   text-400 mb-8">
             Contact Us
           </h1>
           <div className="max-w-screen-xl px-6 mx-auto ">
