@@ -35,9 +35,12 @@
     "react-slick": "^0.30.2",
     "recharts": "^2.12.7",
     "slick-carousel": "^1.8.1",
-    "some-library": "^1.0.0"
+    "some-library": "^1.0.0",
+    "styled-components": "^6.1.12",
+    "twin.macro": "^3.4.1"
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
