@@ -29,16 +29,7 @@ const Header = () => {
           <Link to="/about" className="hover:text-gray-300">About Us</Link>
           <Link to="/new-contact" className="hover:text-gray-300">Contact Us</Link>
           <Link to="/faq" className="hover:text-gray-300">FAQ</Link>
-          {/* Uncomment if needed */}
-          {/* <Link to="/wishlist" className="hover:text-gray-300">
-            <FaRegHeart className="w-6 h-6 cursor-pointer hover:text-gray-300" />
-          </Link>
-          <Link to="/search" className="hover:text-gray-300">
-            <FiSearch className="w-6 h-6 cursor-pointer hover:text-gray-300" />
-          </Link>
-          <Link to="/cart" className="block px-4 py-2">
-            <FaCartPlus className="w-6 h-6 cursor-pointer hover:text-gray-300" />
-          </Link> */}
+         
         </nav>
 
         <div className="md:hidden">
