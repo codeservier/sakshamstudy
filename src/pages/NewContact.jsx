@@ -107,9 +107,9 @@ const NewContact = () => {
   };
   return (
     <>
-      <section className="bg-[#f5f5dc] min-h-screen ">
+      <section className="bg-mywh  ">
         <div className="container p-4 mx-auto ">
-          <h1 className="text-4xl text-center font-medium text-[#800020] text-400 mb-8">
+          <h1 className="text-4xl text-center font-extrabold  text-primary   text-400 mb-8">
             Contact Us
           </h1>
           <div className="max-w-screen-xl px-6 mx-auto ">
@@ -135,7 +135,7 @@ const NewContact = () => {
                 <div className="flex items-center justify-center ">
                   <div className="w-full max-w-lg p-8 bg-white rounded-lg shadow-lg  hover:scale-95 hover:bg-white transition-all duration-300">
                     <div className="flex justify-between mb-6 border-b">
-                      <button className="text-[#800020] font-semibold py-2 px-4 border-orange-500 border-b-2">
+                      <button className="text-primary font-semibold py-2 px-4 border-secondary border-b-2">
                         Course Enquiry
                       </button>
                     </div>
@@ -152,7 +152,7 @@ const NewContact = () => {
                         placeholder="Full Name"
                         value={formData.fullName}
                         onChange={handleInputChange}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-secondary"
                       />
                       <span id="nameError" className="text-red-600">{errors.fullName}</span>
                     </div>
@@ -169,7 +169,7 @@ const NewContact = () => {
                         placeholder="Email Address"
                         value={formData.email}
                         onChange={handleInputChange}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-secondary"
                       />
                       <span id="emailError" className="text-red-600">{errors.email}</span>
                     </div>
@@ -180,7 +180,7 @@ const NewContact = () => {
                       >
                         Phone Number *
                       </label>
-                      <div className="flex items-center border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-orange-500">
+                      <div className="flex items-center border border-gray-300 rounded-lg focus-within:ring-1 focus-within:ring-secondary">
                         <span className="px-3 py-2 text-gray-500">IN</span>
                         <span className="px-1 py-2 text-gray-500">+91</span>
                         <input
@@ -207,14 +207,14 @@ const NewContact = () => {
                         placeholder="Your message"
                         value={formData.message}
                         onChange={handleInputChange}
-                        className="w-full h-24 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        className="w-full h-24 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-secondary"
                       ></textarea>
                       <span id="messageError" className="text-red-600">{errors.message}</span>
                     </div>
                     <div className="flex justify-center">
                       <button
                         onClick={handleOnSubmit}
-                        className="px-6 py-2 bg-[#800020] text-white font-semibold rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        className="px-6 py-2 bg-pri text-white font-semibold rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500"
                       >
                         Submit
                       </button>
