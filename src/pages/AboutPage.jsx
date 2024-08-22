@@ -86,7 +86,7 @@ const AboutPage = () => {
               </div>
             </div>
           </section>
-
+{/* fgfsffdgfgdfgdfgdfgdgdgdfgdfgdfgdfgdfgdgdfgdfgdfgdfgdf */}
           <section className="bg-mywhite py-12 mb-8">
             <div className="max-w-screen-xl mx-auto px-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
