@@ -1,4 +1,3 @@
-// src/components/TopInstructor.jsx
 import React from "react";
 import Slider from "react-slick";
 import image1 from "../assets/sk.png";
@@ -14,17 +13,17 @@ const libraryData = [
   {
     title: "Central Library",
     description: "The main branch of our library with extensive collections, study rooms, and community events.",
-    image: image1,
+    image: image4,
   },
   {
     title: "Northside Branch",
     description: "A popular branch known for its children’s section and educational programs for kids.",
-    image: image2,
+    image: image4,
   },
   {
     title: "West End Library",
     description: "A branch with a focus on digital resources and technology workshops for all ages.",
-    image: image3,
+    image: image4,
   },
   {
     title: "Eastside Library",
@@ -34,14 +33,15 @@ const libraryData = [
   {
     title: "Southgate Library",
     description: "Known for its vast collection of historical and research materials.",
-    image: image5,
+    image: image4,
   },
   {
     title: "Downtown Library",
     description: "The downtown location offers a quiet study space and hosts various cultural events.",
-    image: image6,
+    image: image4,
   },
 ];
+
 // Slider settings
 const sliderSettings = {
   dots: true,
@@ -51,17 +51,19 @@ const sliderSettings = {
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 3000,
+  centerMode: true,
+  centerPadding: '20px', // Adjust padding for responsiveness
 };
 
 const Testimonials = () => {
   return (
-    <div className="container mx-auto p-4 my-4">
-      <h1 className="text-2xl font-medium text-[#800020] mb-4 text-center">
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-2xl sm:text-3xl font-medium mb-8 text-center">
         Testimonials
       </h1>
-      <Slider {...sliderSettings} className="">
+      <Slider {...sliderSettings} className="relative">
         {libraryData.map((card, index) => (
-          <div key={index} className="flex justify-center">
+          <div key={index} className="flex justify-center px-2">
             <TopInstructorCard
               title={card.title}
               description={card.description}
