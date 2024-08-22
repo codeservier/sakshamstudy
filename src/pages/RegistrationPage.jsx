@@ -441,7 +441,7 @@ const RegistrationPage = () => {
             type="submit"
             className="bg-[#42c4e2] text-white px-4 py-2 rounded-md w-full hover:bg-[#ffc61a] transition duration-300"
           >
-            Pay Now
+           Submit
           </button>
         </form>
       </div>

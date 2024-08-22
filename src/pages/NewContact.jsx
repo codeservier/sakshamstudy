@@ -214,7 +214,7 @@ const NewContact = () => {
                     <div className="flex justify-center">
                       <button
                         onClick={handleOnSubmit}
-                        className="px-6 py-2 bg-pri text-white font-semibold rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        className="px-6 py-2 bg-pri bg-primary text-white font-semibold rounded-lg hover:bg-secondary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500"
                       >
                         Submit
                       </button>
