@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Faq from "../components/FAQ/Faq.jsx";
 
+// Import your image or use a URL
+import faqImage from "../assets/svg/animated.svg"; // Example image import
+
 export default function FaqPage() {
   const [faqs, setFaqs] = useState([
     {
@@ -33,8 +36,6 @@ export default function FaqPage() {
         "You can enroll in a course by visiting our website and filling out the registration form or by contacting our office directly.",
       open: false,
     },
-
-
   ]);
 
   const toggleFAQ = (index) => {
@@ -53,12 +54,20 @@ export default function FaqPage() {
 
   return (
     <>
-      <div className="text-center p-8">
-        <h1 className="text-4xl font-extra-heavy mb-8 pt-8">
+      <div className="text-center p-4 md:p-8">
+        {/* Centering the image */}
+        <div className="flex justify-center mb-4 md:mb-8">
+          <img 
+            src={faqImage}
+            alt="FAQ"
+            className="w-full max-w-md h-auto object-cover"
+          />
+        </div>
+        <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-8">
           Frequently Asked Questions
         </h1>
       </div>
-      <div className="faqs">
+      <div className="faqs px-4 md:px-8">
         {faqs.map((faq, index) => (
           <Faq faq={faq} index={index} key={index} toggleFAQ={toggleFAQ} />
         ))}

@@ -1,17 +1,20 @@
 import React from "react";
+import Logo from "../../assets/logo/Logo";
+// import logo from '../../assets/logo/'
 
 const Footer = () => {
   return (
-    <footer className="bg-primary/20 py-8 px-10 sm:px-14 text-gray-600">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="bg-[#052e33] py-8 px-10 sm:px-14 text-gray-600 ">
+
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 space-x-7">
         <div>
-          <h3 className="font-semibold mb-2">About Us</h3>
+          <h3 className="font-semibold mb-2 space-x-7 text-mywhite">About Us</h3>
           <p className="text-gray-400 space-x-7">
             We are committed to providing the best learning management system.
           </p>
         </div>
         <div>
-          <h3 className="font-semibold mb-2">Quick Links</h3>
+          <h3 className="font-semibold mb-2 text-mywhite">Quick Links</h3>
           <ul className="space-y-2">
             <li>
               <a href="/" className="text-gray-400 hover:underline">
@@ -36,8 +39,8 @@ const Footer = () => {
           </ul>
         </div>
         <div>
-          <h3 className="font-semibold mb-2">Resources</h3>
-          <ul className="space-y-2">
+          <h3 className="font-semibold text-mywhite mb-2">Resources</h3>
+          <ul  className="space-y-2">
             <li>
               <a href="*" className="text-gray-400 hover:underline">
                 Blog
@@ -61,7 +64,7 @@ const Footer = () => {
           </ul>
         </div>
         <div>
-          <h3 className="font-semibold mb-2">Contact Us</h3>
+          <h3 className="font-semibold mb-2 text-white">Contact Us</h3>
           <ul className="space-y-2">
             <li className="text-gray-400">Email: sakshamstudy@gmail.com</li>
             <li className="text-gray-400">Phone: +91 9454310605</li>
