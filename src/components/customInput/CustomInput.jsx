@@ -10,7 +10,7 @@ const CustomInput = ({ id, type, placeholder, value, onChange, error, label, ...
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className="px-4 py-2 border  border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2]"
+        className="px-4 py-2 border text-myblack  border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2]"
         {...props}
       />
       {error && <span className="text-red-600">{error}</span>}
