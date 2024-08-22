@@ -27,7 +27,7 @@ const Header = () => {
             Home
           </Link>
           <Link to="/mylearning" className={getLinkClasses("/mylearning")}>
-            Courses
+           Libraries
           </Link>
           <Link to="/about" className={getLinkClasses("/about")}>
             About Us
@@ -77,7 +77,7 @@ const Header = () => {
               "/mylearning"
             )}`}
           >
-            My Learning
+           Libraries
           </Link>
           <Link
             to="/about"

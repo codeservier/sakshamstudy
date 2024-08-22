@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
 import Card from "../components/card/Card";
-import image1 from "../assets/courses/Course.png";
-import image2 from "../assets/courses/Course.png";
-import image3 from "../assets/courses/Course.png";
-import image4 from "../assets/courses/Course.png";
-import image5 from "../assets/courses/Course.png";
-import image6 from "../assets/courses/Course.png";
+import image1 from "../assets/libraries/1.png";
+import image2 from "../assets/libraries/2.png";
+import image3 from "../assets/libraries/3.png";
+import image4 from "../assets/libraries/4.png";
+import image5 from "../assets/libraries/5.png";
+import image6 from "../assets/libraries/6.png";
 import Loader from "../components/loader/Loader";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -18,17 +18,17 @@ const MyLearning = () => {
 
   const coursesData = [
     {
-      title: "IIT JEE",
+      title: "Library1",
       description: "1000+ Hours of live Classes will be live on the PW app",
       image: image2,
     },
     {
-      title: "School Preparation",
+      title: "Library2",
       description: "Chapterwise/Topicwise Weekly & Monthly Test On Sunday.",
       image: image3,
     },
     {
-      title: "NEET",
+      title: "Library3",
       description:
         "This Batch is for NDA aspirants Targeting the NDA 1, 2025 Exam",
       image: image4,
@@ -37,18 +37,18 @@ const MyLearning = () => {
 
   const techCoursesData = [
     {
-      title: "Defence",
+      title: "course 1",
       description: "1000+ Hours of live Classes will be live on the PW app",
       image: image5,
     },
     {
-      title: "Govt Job Exams",
+      title: "course 2",
       description:
         "This Batch is for NDA aspirants Targeting the NDA 1, 2025 Exam",
       image: image6,
     },
     {
-      title: "CA",
+      title: "course 3",
       description: "Chapterwise/Topicwise Weekly & Monthly Test On Sunday.",
       image: image1,
     },
@@ -94,9 +94,9 @@ const MyLearning = () => {
           <div className="container mx-auto p-4 my-4">
             <h1
               ref={coursesRef}
-              className="text-2xl font-medium text-[#800020] mb-4"
+              className="text-2xl font-medium  mb-4"
             >
-              Our Faclities
+              Libraries
             </h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {coursesData.map((card, index) => (
@@ -112,9 +112,9 @@ const MyLearning = () => {
 
             <h1
               ref={techCoursesRef}
-              className="text-2xl font-medium text-[#800020] mt-8 mb-4"
+              className="text-2xl font-medium  mt-8 mb-4"
             >
-              Tech Courses
+              Academic Courses
             </h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {techCoursesData.map((card, index) => (
