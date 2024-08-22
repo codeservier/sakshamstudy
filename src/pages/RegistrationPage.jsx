@@ -216,7 +216,7 @@ const RegistrationPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center w-screen">
+    <div className="flex justify-center items-center">
       <div className="bg-white p-8 rounded-lg w-full h-full flex flex-col justify-center">
          <div className="bg-white rounded-lg w-full h-full flex flex-col items-center">
         <Logo width="50" height="50" fill="#FF5733" />
