@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import TermCondition from '../TermCondition'; 
+import FaqPage from'../FaqPage';
 import AboutPage from '../AboutPage';
 import ContactPage from '../ContactPage';
 import SearchPage from '../SearchPage';
@@ -51,6 +52,7 @@ const AppRoutes = () => {
           <Route path="/lecture" element={<LecturePage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/faq" element={<FaqPage />} />
           <Route path="/terms-and-conditions" element={<TermCondition />} />
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="*" element={<PageNotFound />} />
