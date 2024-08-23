@@ -51,7 +51,9 @@ const Header = () => {
           <nav>
             <Link
               to="/register"
-              className="hidden md:block bg-primary hover:bg-secondary hover:cursor-pointer transition-all duration-200  font-bold rounded-lg p-3 text-white hover:no-underline hover:scale-105 hover:translate-x-3 "
+              className="hidden md:block bg-primary hover:bg-secondary 
+              hover:cursor-pointer transition-all duration-200  font-bold rounded-[20px] p-2.5 px-8
+               text-white hover:no-underline hover:scale-105 hover:translate-x-3 shadow-lg "
             >
               Registration
             </Link>

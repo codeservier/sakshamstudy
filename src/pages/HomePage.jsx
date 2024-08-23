@@ -13,6 +13,9 @@ import Other from "./Other";
 export const HomePage = () => {
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []); 
   return (
     <>
       {false ? (
@@ -45,14 +48,10 @@ export const HomePage = () => {
             <Toppicks />
           </div>
           <div className="max-w-screen-xl mx-auto px-2 ">
-            <TopInstructor />
+            <TopInstructor  />
           </div>
         </>
       )}
     </>
   );
 };
-
-
-
-// fguygbvjkhnhkl

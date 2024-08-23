@@ -1,16 +1,17 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth,createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth } from "firebase/auth"; // No need to import createUserWithEmailAndPassword here
 
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDZQlj0FZxwv-mz_xTbmOFa59dqy2BckA0",
-  authDomain: "pragaticoachingclasses-84688.firebaseapp.com",
-  projectId: "pragaticoachingclasses-84688",
-  storageBucket: "pragaticoachingclasses-84688.appspot.com",
-  messagingSenderId: "900887656765",
-  appId: "1:900887656765:web:9c318119a1fb70eacbad54",
-  measurementId: "G-X14LD1DMQ9"
+  apiKey: "AIzaSyAWNzWhgu5sdpY7lyV2KXc4o73dTOZr2Ik",
+  authDomain: "sakshamstudies-d4e2c.firebaseapp.com",
+  projectId: "sakshamstudies-d4e2c",
+  storageBucket: "sakshamstudies-d4e2c.appspot.com",
+  messagingSenderId: "919812290404",
+  appId: "1:919812290404:web:19aae119ff2b8d337fec71",
+  measurementId: "G-X7FV34ZRBC"
 };
 
 // Initialize Firebase
@@ -18,6 +19,8 @@ const app = initializeApp(firebaseConfig);
 
 // Initialize Firestore
 const db = getFirestore(app);
-const auth= getAuth(app);
 
-export { db,auth };
+// Initialize Auth
+const auth = getAuth(app);
+
+export { db, auth };

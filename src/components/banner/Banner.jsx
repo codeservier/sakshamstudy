@@ -26,45 +26,45 @@ const Banner = () => {
   return (
     <div className="self-center">
       <Slider {...settings}>
-        <div className="h-400 w-full object-cover  ">
+        <div className="h- 400 w-200  object-contain  ">
           <img
             src={image1}
             alt="Slide 1"
-            className="h-400 w-full object-cover rounded-xl"
+            className="h- 400 w-200  object-cover rounded-xl"
           />
         </div>
-        <div className="h-400 w-full object-cover ">
+        <div className="h- 400 w-200   object-contain ">
           <img
             src={image2}
             alt="Slide 2"
-            className="h-400 w-full object-cover rounded-xl"
+            className="h- 400 w-200  object-cover rounded-xl"
           />
         </div>
-        <div className="h-500 w-full object-cover">
+        <div className="h-500   object-contain">
           <img
             src={image3}
             alt="Slide 3"
-            className="h-400 w-full object-cover rounded-xl"          />
+            className="h- 400 w-200  object-cover rounded-xl"          />
         </div>
-        <div className="h-400 w-full object-cover">
+        <div className="h- 400 w-200   object-contain">
           <img
             src={image4}
             alt="Slide 4"
-           className="h-400 w-full object-cover rounded-xl"
+           className="h- 400 w-200   object-contain  rounded-xl"
           />
         </div>
-        <div className="h-400 w-full object-cover">
+        <div className="h- 400 w-200   object-contain">
           <img
             src={image5}
             alt="Slide 5"
-            className="h-400 w-full object-cover rounded-xl"
+            className="h- 400 w-200   object-contain rounded-xl"
           />
         </div>
-        <div className="h-400 w-full object-cover">
+        <div className="h- 400 w-200   object-contain">
           <img
             src={image6}
             alt="Slide 6"
-            className="h-400 w-full object-cover rounded-xl"
+            className="h- 400 w-200   object-contain rounded-xl"
           />
         </div>
       </Slider>

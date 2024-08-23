@@ -1,11 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
-import image1 from "../assets/sk.png";
-import image2 from "../assets/ak.png";
-import image3 from "../assets/vk.png";
 import image4 from "../assets/image.png";
-import image5 from "../assets/d.png";
-import image6 from "../assets/v.png";
 import TopInstructorCard from "./card/TopInstructorCard";
 
 // Sample data
@@ -52,7 +47,7 @@ const sliderSettings = {
   autoplay: true,
   autoplaySpeed: 3000,
   centerMode: true,
-  centerPadding: '20px', // Adjust padding for responsiveness
+  centerPadding: '0px', // Remove padding for a more consistent layout
 };
 
 const Testimonials = () => {
@@ -61,17 +56,19 @@ const Testimonials = () => {
       <h1 className="text-2xl sm:text-3xl font-medium mb-8 text-center">
         Testimonials
       </h1>
-      <Slider {...sliderSettings} className="relative">
-        {libraryData.map((card, index) => (
-          <div key={index} className="flex justify-center px-2">
-            <TopInstructorCard
-              title={card.title}
-              description={card.description}
-              image={card.image}
-            />
-          </div>
-        ))}
-      </Slider>
+      <div className="relative overflow-hidden">
+        <Slider {...sliderSettings} className="w-full">
+          {libraryData.map((card, index) => (
+            <div key={index} className="flex justify-center px-2">
+              <TopInstructorCard
+                title={card.title}
+                description={card.description}
+                image={card.image}
+              />
+            </div>
+          ))}
+        </Slider>
+      </div>
     </div>
   );
 };

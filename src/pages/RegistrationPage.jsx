@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import Logo from "../assets/logo/Logo";
 import { db, auth } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 import CustomInput from "../components/customInput/CustomInput.jsx"; // Import CustomInput
 
 const RegistrationPage = () => {
-  const courses = ["Hall - 1", "Hall - 2", "Hall - 3", "Hall - 4", "Hall - 5"]; // Example courses
-  const slots = ["10", "20", "30", "40", "50", "60", "70", "80", "90"]; // Example slots
+  const courses = ["Hall - 1", "Hall - 2", "Hall - 3", "Hall - 4", "Hall - 5"];
+  const slots = ["10", "20", "30", "40", "50", "60", "70", "80", "90"];
 
   const [formData, setFormData] = useState({
     name: "",
@@ -19,17 +20,15 @@ const RegistrationPage = () => {
     state: "",
     password: "",
     confirmPassword: "",
-    selectedCourses: [], // Initialize selectedCourses
+    selectedCourses: [],
     selectedSlots: [],
-    agreedToTerms: false, // Initialize agreedToTerms
+    agreedToTerms: false,
   });
 
   const [errors, setErrors] = useState({});
   const [courseError, setCourseError] = useState("");
   const [slotError, setSlotError] = useState("");
-  const [isPaymentComplete, setIsPaymentComplete] = useState(false); // Track payment status
 
-  // For input change
   const handleInputChange = (e) => {
     const { id, value, type, checked } = e.target;
     setFormData((prevData) => ({
@@ -37,7 +36,6 @@ const RegistrationPage = () => {
       [id]: type === "checkbox" ? checked : value,
     }));
 
-    // Basic validation for empty fields
     setErrors((prevErrors) => ({
       ...prevErrors,
       [id]: value ? "" : `${id} is required`,
@@ -46,8 +44,6 @@ const RegistrationPage = () => {
 
   const handlePhoneNumberChange = (e) => {
     const { id, value } = e.target;
-
-    // Allow only numeric input and limit length to 10 digits
     if (/^\d*$/.test(value) && value.length <= 10) {
       setFormData((prevData) => ({
         ...prevData,
@@ -117,7 +113,6 @@ const RegistrationPage = () => {
       agreedToTerms,
     } = formData;
 
-    // Validation checks
     const newErrors = {};
     if (!name) newErrors.name = "Name is required";
     if (!email) {
@@ -156,7 +151,6 @@ const RegistrationPage = () => {
 
     setErrors(newErrors);
 
-    // Stop submission if there are errors
     if (Object.keys(newErrors).length > 0) {
       return;
     }
@@ -169,27 +163,23 @@ const RegistrationPage = () => {
       );
       const user = userCredential.user;
       console.log("User signed up:", user);
+
       if (user) {
-        localStorage.setItem(
-          "registrationData",
-          JSON.stringify({
-            name: name,
-            email: email,
-            phoneNumber: phoneNumber,
-            selectedCourses: selectedCourses, // Save selected courses
-            selectedSlots: selectedSlots,
-            address,
-            pinCode,
-            district,
-            state,
-            password: password,
-            userId: user.uid,
-            agreedToTerms,
-            // Save selected slots
-          })
-        );
-        console.log("Registration successful");
-        // alert("Registration completed successfully!");
+        await setDoc(doc(db, "users", user.uid), {
+          name,
+          email,
+          phoneNumber,
+          selectedCourses,
+          selectedSlots,
+          address,
+          pinCode,
+          district,
+          state,
+          userId: user.uid,
+        });
+
+        console.log("User data saved in Firestore");
+
         window.location.href = "/payment";
 
         setFormData({
@@ -202,9 +192,9 @@ const RegistrationPage = () => {
           state: "",
           password: "",
           confirmPassword: "",
-          selectedCourses: [], // Reset selected courses
-          selectedSlots: [], // Reset selected slots
-          agreedToTerms: false, // Reset agreedToTerms
+          selectedCourses: [],
+          selectedSlots: [],
+          agreedToTerms: false,
         });
       }
     } catch (error) {

@@ -23,7 +23,7 @@ const Footer = () => {
             </li>
             <li>
               <a href="/mylearning" className="text-gray-400 hover:underline">
-                Courses
+                Libraries
               </a>
             </li>
             <li>

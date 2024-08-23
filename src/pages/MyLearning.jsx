@@ -82,7 +82,9 @@ const MyLearning = () => {
   const handleCardClick = (id) => {
     navigate(`/coursedetail`);
   };
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []); 
   return (
     <>
       {false ? (
