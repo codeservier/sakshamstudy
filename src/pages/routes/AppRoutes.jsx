@@ -27,7 +27,7 @@ import Dashboard from '../../Admin/pages/Dashboard';
 import AdLayout from '../../Admin/components/shared/AdLayout';
 import Product from '../../Admin/pages/Branches';
 import Layout from '../../components/Layout/Layout';
-
+import Documents from '../Documents';
 
 
 const AppRoutes = () => {
@@ -55,6 +55,7 @@ const AppRoutes = () => {
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/terms-and-conditions" element={<TermCondition />} />
           <Route path="/payment" element={<PaymentPage />} />
+          <Route path='/document' element={< Documents/>}/>
           <Route path="*" element={<PageNotFound />} />
         </Route>
 

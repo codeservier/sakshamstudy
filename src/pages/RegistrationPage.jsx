@@ -1,9 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Logo from "../assets/logo/Logo";
-import { db, auth } from "../../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
-import CustomInput from "../components/customInput/CustomInput.jsx"; // Import CustomInput
+import CustomInput from "../components/customInput/CustomInput.jsx";
 
 const RegistrationPage = () => {
   const courses = ["Hall - 1", "Hall - 2", "Hall - 3", "Hall - 4", "Hall - 5"];
@@ -18,16 +16,15 @@ const RegistrationPage = () => {
     pinCode: "",
     district: "",
     state: "",
-    password: "",
-    confirmPassword: "",
-    selectedCourses: [],
+    selectedHall: [],
     selectedSlots: [],
-    agreedToTerms: false,
   });
 
   const [errors, setErrors] = useState({});
   const [courseError, setCourseError] = useState("");
   const [slotError, setSlotError] = useState("");
+
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { id, value, type, checked } = e.target;
@@ -57,11 +54,11 @@ const RegistrationPage = () => {
   };
 
   const handleCourseChange = (e) => {
-    const selectedCourse = e.target.value;
-    if (selectedCourse && !formData.selectedCourses.includes(selectedCourse)) {
+    const selectedHall = e.target.value;
+    if (selectedHall && !formData.selectedHall.includes(selectedHall)) {
       setFormData((prevData) => ({
         ...prevData,
-        selectedCourses: [...prevData.selectedCourses, selectedCourse],
+        selectedHall: [...prevData.selectedHall, selectedHall],
       }));
       setCourseError("");
     }
@@ -70,7 +67,7 @@ const RegistrationPage = () => {
   const removeCourse = (courseToRemove) => {
     setFormData((prevData) => ({
       ...prevData,
-      selectedCourses: prevData.selectedCourses.filter(
+      selectedHall: prevData.selectedHall.filter(
         (course) => course !== courseToRemove
       ),
     }));
@@ -96,7 +93,7 @@ const RegistrationPage = () => {
     }));
   };
 
-  const handleOnSubmit = async (e) => {
+  const handleOnSubmit = (e) => {
     e.preventDefault();
     const {
       name,
@@ -106,11 +103,8 @@ const RegistrationPage = () => {
       pinCode,
       district,
       state,
-      password,
-      confirmPassword,
-      selectedCourses,
+      selectedHall,
       selectedSlots,
-      agreedToTerms,
     } = formData;
 
     const newErrors = {};
@@ -128,7 +122,7 @@ const RegistrationPage = () => {
     } else if (phoneNumber.length !== 10) {
       newErrors.phoneNumber = "Phone number must be exactly 10 digits";
     }
-    if (selectedCourses.length === 0) {
+    if (selectedHall.length === 0) {
       setCourseError("Please select at least one course");
     } else {
       setCourseError("");
@@ -142,12 +136,6 @@ const RegistrationPage = () => {
     if (!pinCode) newErrors.pinCode = "Pin code is required";
     if (!district) newErrors.district = "Please enter District";
     if (!state) newErrors.state = "Please enter State";
-    if (!password) newErrors.password = "Password is required";
-    if (password !== confirmPassword)
-      newErrors.confirmPassword = "Passwords do not match";
-    if (!agreedToTerms) {
-      newErrors.terms = "You must agree to the terms and conditions";
-    }
 
     setErrors(newErrors);
 
@@ -155,56 +143,14 @@ const RegistrationPage = () => {
       return;
     }
 
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = userCredential.user;
-      console.log("User signed up:", user);
+    // Construct query params
+    const queryParams = new URLSearchParams({
+      ...formData,
+      selectedHall: formData.selectedHall.join(','),
+      selectedSlots: formData.selectedSlots.join(','),
+    }).toString();
 
-      if (user) {
-        await setDoc(doc(db, "users", user.uid), {
-          name,
-          email,
-          phoneNumber,
-          selectedCourses,
-          selectedSlots,
-          address,
-          pinCode,
-          district,
-          state,
-          userId: user.uid,
-        });
-
-        console.log("User data saved in Firestore");
-
-        window.location.href = "/payment";
-
-        setFormData({
-          name: "",
-          email: "",
-          phoneNumber: "",
-          address: "",
-          pinCode: "",
-          district: "",
-          state: "",
-          password: "",
-          confirmPassword: "",
-          selectedCourses: [],
-          selectedSlots: [],
-          agreedToTerms: false,
-        });
-      }
-    } catch (error) {
-      if (error.code === "auth/email-already-in-use") {
-        alert("This email is already in use. Please use a different email.");
-      } else {
-        console.error("Error signing up:", error);
-        alert(`Error signing up: ${error.message}`);
-      }
-    }
+    navigate(`/document?${queryParams}`);
   };
 
   return (
@@ -214,44 +160,48 @@ const RegistrationPage = () => {
           <Logo width="50" height="50" fill="#FF5733" />
         </div>
 
-        <h1 className="text-2xl font-bold text-center">
-          Registration Here
-        </h1>
+        <h1 className="text-2xl font-bold text-center">Registration Here</h1>
 
-        <form onSubmit={handleOnSubmit}   >
+        <form onSubmit={handleOnSubmit}>
           {/* Basic Details */}
-            <h2 className="text-xl font-semibold text-left mb-4">
-              Basic Details
-            </h2>
-          <section className="mb-6  ">
-            <div className="space-y-4 md:space-y-0 md:flex md:gap-4 flex justify-between">
-              <CustomInput
-                id="name"
-                type="text"
-                placeholder="Name"
-                value={formData.name}
-                onChange={handleInputChange}
-                error={errors.name}
-                label="Name"
-              />
-              <CustomInput
-                id="email"
-                type="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleInputChange}
-                error={errors.email}
-                label="Email"
-              />
-              <CustomInput
-                id="phoneNumber"
-                type="text"
-                placeholder="Phone Number"
-                value={formData.phoneNumber}
-                onChange={handlePhoneNumberChange}
-                error={errors.phoneNumber}
-                label="Phone Number"
-              />
+          <h2 className="text-xl font-semibold text-left mb-4">
+            Basic Details
+          </h2>
+          <section className="mb-6">
+            <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:gap-4">
+              <div className="flex-1">
+                <CustomInput
+                  id="name"
+                  type="text"
+                  placeholder="Name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  error={errors.name}
+                  label="Name"
+                />
+              </div>
+              <div className="flex-1">
+                <CustomInput
+                  id="email"
+                  type="email"
+                  placeholder="Email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  error={errors.email}
+                  label="Email"
+                />
+              </div>
+              <div className="flex-1">
+                <CustomInput
+                  id="phoneNumber"
+                  type="text"
+                  placeholder="Phone Number"
+                  value={formData.phoneNumber}
+                  onChange={handlePhoneNumberChange}
+                  error={errors.phoneNumber}
+                  label="Phone Number"
+                />
+              </div>
             </div>
           </section>
 
@@ -279,7 +229,7 @@ const RegistrationPage = () => {
                   ))}
                 </select>
                 <div className="mt-2 flex flex-wrap gap-4">
-                  {formData.selectedCourses.map((course, index) => (
+                  {formData.selectedHall.map((course, index) => (
                     <div
                       key={index}
                       className="flex items-center bg-[#42c4e2] text-white rounded-full py-1 px-4 border-b border-gray-200 mb-2"
@@ -341,7 +291,7 @@ const RegistrationPage = () => {
             <h2 className="text-xl font-semibold mb-4">Address Details</h2>
             <div className="space-y-4">
               <div className="md:flex md:gap-4">
-              <CustomInput
+                <CustomInput
                   id="district"
                   type="text"
                   placeholder="District"
@@ -369,74 +319,27 @@ const RegistrationPage = () => {
                   label="Pin Code"
                 />
               </div>
-              <div className="md:flex md:gap-4">
               <CustomInput
-                  id="address"
-                  type="text"
-                  placeholder="Address"
-                  value={formData.address}
-                  onChange={handleInputChange}
-                  error={errors.address}
-                  label="Address"
-                />
-               
-              </div>
-            </div>
-          </section>
-
-          {/* Contact Details */}
-          <section className="">
-            <h2 className="text-xl font-semibold mb-4">Contact Details</h2>
-            <div className="space-y-4">
-              <div className="md:flex md:gap-4">
-                <CustomInput
-                  id="password"
-                  type="password"
-                  placeholder="Password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  error={errors.password}
-                  label="Password"
-                />
-                <CustomInput
-                  id="confirmPassword"
-                  type="password"
-                  placeholder="Confirm Password"
-                  value={formData.confirmPassword}
-                  onChange={handleInputChange}
-                  error={errors.confirmPassword}
-                  label="Confirm Password"
-                />
-              </div>
-              <div className="flex items-center">
-                <input
-                  id="agreedToTerms"
-                  type="checkbox"
-                  checked={formData.agreedToTerms}
-                  onChange={handleInputChange}
-                  className="mr-2"
-                />
-                <label htmlFor="agreedToTerms" className="text-gray-600">
-                  I agree to the{" "}
-                  <a href="/terms-and-conditions" className="text-blue-600">
-                    terms and conditions
-                  </a>
-                </label>
-                <span className="text-red-600 block mt-1">{errors.terms}</span>
-              </div>
+                id="address"
+                type="text"
+                placeholder="Address"
+                value={formData.address}
+                onChange={handleInputChange}
+                error={errors.address}
+                label="Address"
+              />
             </div>
           </section>
 
           <button
             type="submit"
-            className="bg-[#42c4e2] text-white px-4 py-2 rounded-md w-full hover:bg-[#ffc61a] transition duration-300"
+            className="w-full py-3 text-white bg-[#42c4e2] rounded-full hover:bg-secondary"
           >
-           Submit
+            Save & Continue
           </button>
         </form>
       </div>
     </div>
-
   );
 };
 
