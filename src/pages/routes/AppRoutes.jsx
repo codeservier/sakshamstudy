@@ -1,41 +1,41 @@
-import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import TermCondition from '../TermCondition'; 
-import FaqPage from'../FaqPage';
-import AboutPage from '../AboutPage';
-import ContactPage from '../ContactPage';
-import SearchPage from '../SearchPage';
-import MyLearning from '../MyLearning';
-import PageNotFound from '../PageNotFound';
-import RegistrationPage from '../RegistrationPage';
-import { HomePage } from '../HomePage';
-import Login from '../Login';
-import CourseDetailPage from '../CourseDetailPage';
-import LecturePage from '../LecturePage';
-import Myprofile from '../../components/profile/Myprofile';
-import Subscription from '../../components/profile/Subscription';
-import PaymentMethod from '../../components/profile/PaymentMethod';
-import PublicProfile from '../../components/profile/PublicProfile';
-import Wishlisttab from '../../components/wishlisttab/Wishlisttab';
-import CartPage from '../CartPage';
-import Checkout from './Checkout';
-import NewContact from '../NewContact';
-import PaymentPage from '../../components/PaymentPage';
-import AdminDashboard from '../../Admin/dashboard/AdminDashboard';
-import Dashboard from '../../Admin/pages/Dashboard';
-import AdLayout from '../../Admin/components/shared/AdLayout';
-import Product from '../../Admin/pages/Branches';
-import Layout from '../../components/Layout/Layout';
-import Documents from '../Documents';
-
+import TermCondition from "../TermCondition";
+import FaqPage from "../FaqPage";
+import AboutPage from "../AboutPage";
+import ContactPage from "../ContactPage";
+import SearchPage from "../SearchPage";
+import MyLearning from "../MyLearning";
+import PageNotFound from "../PageNotFound";
+import RegistrationPage from "../RegistrationPage";
+import { HomePage } from "../HomePage";
+import Login from "../Login";
+import CourseDetailPage from "../CourseDetailPage";
+import LecturePage from "../LecturePage";
+import Myprofile from "../../components/profile/Myprofile";
+import Subscription from "../../components/profile/Subscription";
+import PaymentMethod from "../../components/profile/PaymentMethod";
+import PublicProfile from "../../components/profile/PublicProfile";
+import Wishlisttab from "../../components/wishlisttab/Wishlisttab";
+import CartPage from "../CartPage";
+import Checkout from "./Checkout";
+import NewContact from "../NewContact";
+import PaymentPage from "../../components/PaymentPage";
+import AdminDashboard from "../../Admin/dashboard/AdminDashboard";
+import Dashboard from "../../Admin/pages/Dashboard";
+import AdLayout from "../../Admin/components/shared/AdLayout";
+import Product from "../../Admin/pages/Branches";
+import Layout from "../../components/Layout/Layout";
+import Documents from "../Documents";
+import ContinueWatching from "../ContunueWatching";
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
         {/* Main routes with MainLayout */}
-        <Route element={<Layout/>}>
+        <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/wishlist" element={<Wishlisttab />} />
           <Route path="/about" element={<AboutPage />} />
@@ -47,6 +47,7 @@ const AppRoutes = () => {
           <Route path="/profile/subscription" element={<Subscription />} />
           <Route path="/profile/paymentMethods" element={<PaymentMethod />} />
           <Route path="/profile/publicProfile" element={<PublicProfile />} />
+          <Route path="/continue-watching/:id" element={<ContinueWatching />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Myprofile />} />
           <Route path="/lecture" element={<LecturePage />} />
@@ -55,7 +56,7 @@ const AppRoutes = () => {
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/terms-and-conditions" element={<TermCondition />} />
           <Route path="/payment" element={<PaymentPage />} />
-          <Route path='/document' element={< Documents/>}/>
+          <Route path="/document" element={<Documents />} />
           <Route path="*" element={<PageNotFound />} />
         </Route>
 

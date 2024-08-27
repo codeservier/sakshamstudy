@@ -1,78 +1,65 @@
-import React from "react";
-import image1 from "../assets/libraries/1.png";
-import image2 from "../assets/libraries/2.png";
-import image3 from "../assets/libraries/3.png";
-import image4 from "../assets/libraries/4.png";
-import image5 from "../assets/libraries/5.png";
-import image6 from "../assets/libraries/6.png";
-
-import Card from "../components/card/Card";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { db, doc, getDoc } from '../../firebase';
+import Card from '../components/card/Card';
 
 const ContinueWatching = () => {
-  const { id } = useParams();
   const navigate = useNavigate();
-  const cardsData =  [
-    {
-      id: 1,
-      title: "Pratham Library",
-      description:
-        "Focused collection of resources for SSC CGL, including Quantitative Aptitude, Reasoning, English, and General Awareness.",
-      image: image1,
-    },
-    {
-      id: 2,
-      title: "Rishi Library",
-      description: 
-        "Comprehensive collection for Bank PO exam preparation with a focus on Quant, Reasoning, English, and General Awareness.",
-      image: image2,
-    },
-    {
-      id: 3,
-      title: "Anchal Library",
-      description: 
-        "Extensive resources for Defence Services exams like NDA/CDS, covering Maths, General Ability, and English.",
-      image: image3,
-    },
-    {
-      id: 4,
-      title: "Aman Library",
-      description:
-        "Dedicated collection for Teacher Eligibility Test preparation, focusing on pedagogy, languages, and subject-specific content.",
-      image: image4,
-    },
-    {
-      id: 5,
-      title: "CodeServir Library",
-      description: 
-        "Specialized resources for RBI Grade B exam preparation, covering Economics, Finance, and general aptitude.",
-      image: image5,
-    },
-    {
-      id: 6,
-      title: "Arpit Library",
-      description: 
-        "Curated resources for RRB NTPC exam preparation with emphasis on General Awareness, Arithmetic, and Reasoning.",
-      image: image6,
-    },
-  ];
-  
-  const handleCardClick = (id) => {
-    navigate(`/coursedetail`);
+  const [cardsData, setCardsData] = useState([]);
+
+  useEffect(() => {
+    const fetchCardData = async () => {
+      try {
+        // Replace 'registration' with the actual name of your collection
+        const docRef = doc(db, 'registration', 'your-document-id');
+        
+        console.log('Fetching document:', docRef); // Debugging: log the document reference
+
+        const docSnap = await getDoc(docRef);
+        
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          console.log('Fetched data:', data); // Debugging: log the fetched data
+
+          const libraryLogoUrl = data.libraryLogoUrl;
+          console.log('Library logo URL:', libraryLogoUrl); // Log the library logo URL
+
+          setCardsData([
+            {
+              id: data.id,
+              title: data.title,
+              description: data.description,
+              image: libraryLogoUrl || '/path/to/default-image.jpg', // Fallback image
+            },
+          ]);
+        } else {
+          console.log('No such document!');
+        }
+      } catch (error) {
+        console.error('Error fetching data: ', error);
+      }
+    };
+
+    fetchCardData();
+  }, []);
+
+  const handleCardClick = (cardId) => {
+    navigate(`/coursedetail/${cardId}`);
   };
+
   return (
     <div className="container mx-auto p-6 my-4">
-      <h1 className="text-2xl font-medium text-primary text-400  mb-4">
+      <h1 className="text-2xl font-medium text-primary text-400 mb-4">
         Popular Library
-      </h1> 
+      </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {cardsData.map((card, index) => (
+        {cardsData.map((card) => (
           <Card
-            key={index}
+            key={card.id}
             title={card.title}
             description={card.description}
             image={card.image}
-            onClick={() => handleCardClick()}
+            onClick={() => handleCardClick(card.id)}
           />
         ))}
       </div>
