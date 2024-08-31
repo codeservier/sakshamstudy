@@ -26,7 +26,7 @@ export const Upcoming = () => {
   return (
     <div >
       <h1 className="text-2xl font-medium  px-0 py-4  text-400  mb-4">
-        Future AllLibrary
+        Future All Library
       </h1>
       <Slider {...settings}>
         <div className="h-400 w-full object-cover bg-white shadow-lg rounded-lg group cursor-pointer ">

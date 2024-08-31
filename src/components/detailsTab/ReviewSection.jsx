@@ -18,23 +18,7 @@ const ReviewSection = ({ rating, feedback }) => {
             </div>
           </div>
           <div className="w-[60%] ml-8">
-            {feedback.map((item, index) => (
-              <div key={index} className="flex items-center mb-2">
-                <div className="w-[50%] bg-gray-300 h-2 rounded-full mr-2">
-                  <div
-                    className="bg-[#800020] h-2 rounded-full"
-                    style={{ width: `${item.percentage}%` }}
-                  ></div>
-                </div>
-                <div className="flex items-center  mr-5">
-                  <span className="text-[#800020] text-xl">
-                    {"★".repeat(item.stars)}
-                    {"☆".repeat(5 - item.stars)}
-                  </span>
-                </div>
-                <span className="  text-gray-700">{item.percentage}%</span>
-              </div>
-            ))}
+          
           </div>
         </div>
       </div>

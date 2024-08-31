@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import TermCondition from "../TermCondition";
 import FaqPage from "../FaqPage";
 import AboutPage from "../AboutPage";
-import ContactPage from "../ContactPage";
 import SearchPage from "../SearchPage";
 import AllLibrary from "../AllLibrary";
 import PageNotFound from "../PageNotFound";
