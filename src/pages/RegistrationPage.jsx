@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../assets/logo/Logo";
 import CustomInput from "../components/customInput/CustomInput.jsx";
@@ -23,8 +23,12 @@ const RegistrationPage = () => {
   const [errors, setErrors] = useState({});
   const [courseError, setCourseError] = useState("");
   const [slotError, setSlotError] = useState("");
+  const [showInput, setShowInput] = useState(false);
 
   const navigate = useNavigate();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleInputChange = (e) => {
     const { id, value, type, checked } = e.target;
@@ -78,8 +82,9 @@ const RegistrationPage = () => {
     if (selectedSlot && !formData.selectedSlots.includes(selectedSlot)) {
       setFormData((prevData) => ({
         ...prevData,
-        selectedSlots: [...prevData.selectedSlots, selectedSlot],
+        slot: selectedSlot,
       }));
+      setShowInput(true);
       setSlotError("");
     }
   };
@@ -91,6 +96,7 @@ const RegistrationPage = () => {
         (slot) => slot !== slotToRemove
       ),
     }));
+    setShowInput(false);
   };
 
   const handleOnSubmit = (e) => {
@@ -146,8 +152,8 @@ const RegistrationPage = () => {
     // Construct query params
     const queryParams = new URLSearchParams({
       ...formData,
-      selectedHall: formData.selectedHall.join(','),
-      selectedSlots: formData.selectedSlots.join(','),
+      selectedHall: formData.selectedHall.join(","),
+      selectedSlots: formData.selectedSlots.join(","),
     }).toString();
 
     navigate(`/document?${queryParams}`);
@@ -160,7 +166,7 @@ const RegistrationPage = () => {
           <Logo width="50" height="50" fill="#FF5733" />
         </div>
 
-        <h1 className="text-2xl font-bold text-center">Registration Here</h1>
+        <h1 className="text-2xl font-bold text-center">Register Your Library</h1>
 
         <form onSubmit={handleOnSubmit}>
           {/* Basic Details */}
@@ -247,6 +253,7 @@ const RegistrationPage = () => {
                   <span className="text-red-600">{courseError}</span>
                 </div>
               </div>
+              {/* Chair Details strated */}
               <div className="flex flex-col flex-1">
                 <label className="mb-1 font-semibold text-gray-400">
                   Select Chair
@@ -283,6 +290,7 @@ const RegistrationPage = () => {
                   <span className="text-red-600">{slotError}</span>
                 </div>
               </div>
+              {/* chair Details ended */}
             </div>
           </section>
 

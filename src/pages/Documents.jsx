@@ -22,6 +22,8 @@ const Documents = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    shortdescription: "",
+    longdescription:"",
     agreedToTerms: false,
     libraryLogo: "",
     domain: "",
@@ -31,6 +33,7 @@ const Documents = () => {
   const [previewUrl, setPreviewUrl] = useState("");
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     // Parse URL params and set initial state
     const initialData = {};
     const queryParams = new URLSearchParams(location.search);
@@ -86,10 +89,12 @@ const Documents = () => {
   };
 
   const handleRegister = async () => {
-    const { email, password, confirmPassword, libraryLogo, domain } = formData;
+    const { email, longdescription, password, shortdescription, confirmPassword, libraryLogo, domain } = formData;
 
     const newErrors = {};
     if (!password) newErrors.password = "Password is required";
+    if (!longdescription) newErrors.longdescription = "You Must enter Long Description ";
+    if (!shortdescription) newErrors.shortdescription = "You Must enter Short Description ";
     if (password !== confirmPassword)
       newErrors.confirmPassword = "Passwords do not match";
     if (!formData.agreedToTerms)
@@ -178,7 +183,7 @@ const Documents = () => {
           <Logo width="50" height="50" fill="#FF5733" />
         </div>
 
-        <h1 className="text-2xl font-bold text-center">Registration Here</h1>
+        <h1 className="text-2xl font-bold text-center">Register Your Library </h1>
         {/* logo start */}
         <section>
           <h2 className="text-xl font-semibold mb-2">Uploads</h2>
@@ -274,16 +279,46 @@ const Documents = () => {
           </div>
           {formData.domain === "yes" && (
             <div className="space-y-4">
-              <CustomInput
+            <CustomInput
                 id="domain"
                 type="text"
-                placeholder="Enter your domain"
+                placeholder="domain"
               />
             </div>
           )}
           <span className="text-red-600 block mt-1">{errors.domain}</span>
         </section>
         {/* domain section end */}
+
+
+           {/* decription started */}
+           <section className="mb-6">
+          <h2 className="text-xl font-semibold mb-4">Short Description :-</h2>
+          <div className="space-y-4">
+            <div className="md:flex md:gap-4">
+              <CustomInput
+                id="shortdescription"
+                type="text"
+                placeholder="shortdescription"
+                value={formData.shortdescription}
+                onChange={handleInputChange}
+                error={errors.shortdescription}
+                label="Short Description"
+              />
+              <CustomInput
+                id="longdescription"
+                type="text"
+                placeholder="Long Description"
+                value={formData.longdescription}
+                onChange={handleInputChange}
+                error={errors.longdescription}
+                label="Long Description"
+              />
+            </div>
+          </div>
+        </section>
+           {/* description ended */}
+
 
         <section className="mb-6">
           <h2 className="text-xl font-semibold mb-4">Password</h2>

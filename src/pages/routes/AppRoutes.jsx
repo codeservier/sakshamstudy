@@ -67,7 +67,7 @@ const AppRoutes = () => {
         {/* Admin routes with AdminLayout */}
         <Route element={<AdLayout />}>
           <Route path="/admin" element={<Dashboard />} />
-          <Route path="/alllibrary" element={<Branches />} />
+          <Route path="/branches" element={<Branches />} />
         </Route>
       </Routes>
     </BrowserRouter>
