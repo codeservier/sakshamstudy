@@ -18,8 +18,8 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 	},
 	{
 		key: 'alllibrary',
-		label: 'AllLibrary',
-		path: '/alllibrary',
+		label: 'Branches',
+		path: '/branches',
 		icon: <HiOutlineCube />
 	},
 	{

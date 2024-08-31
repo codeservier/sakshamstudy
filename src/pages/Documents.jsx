@@ -22,6 +22,8 @@ const Documents = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    shortdescription: "",
+    longdescription:"",
     agreedToTerms: false,
     libraryLogo: "",
     domain: "",
@@ -86,10 +88,12 @@ const Documents = () => {
   };
 
   const handleRegister = async () => {
-    const { email, password, confirmPassword, libraryLogo, domain } = formData;
+    const { email, longdescription, password, shortdescription, confirmPassword, libraryLogo, domain } = formData;
 
     const newErrors = {};
     if (!password) newErrors.password = "Password is required";
+    if (!longdescription) newErrors.longdescription = "You Must enter Long Description ";
+    if (!shortdescription) newErrors.shortdescription = "You Must enter Short Description ";
     if (password !== confirmPassword)
       newErrors.confirmPassword = "Passwords do not match";
     if (!formData.agreedToTerms)
@@ -274,16 +278,50 @@ const Documents = () => {
           </div>
           {formData.domain === "yes" && (
             <div className="space-y-4">
-              <CustomInput
+            <CustomInput
                 id="domain"
                 type="text"
-                placeholder="Enter your domain"
+                placeholder="domain"
+                value={formData.domain}
+                onChange={handleInputChange}
+                error={errors.domain}
+                label="Short Description"
               />
             </div>
           )}
           <span className="text-red-600 block mt-1">{errors.domain}</span>
         </section>
         {/* domain section end */}
+
+
+           {/* decription started */}
+           <section className="mb-6">
+          <h2 className="text-xl font-semibold mb-4">Short Description :-</h2>
+          <div className="space-y-4">
+            <div className="md:flex md:gap-4">
+              <CustomInput
+                id="shortdescription"
+                type="text"
+                placeholder="shortdescription"
+                value={formData.shortdescription}
+                onChange={handleInputChange}
+                error={errors.shortdescription}
+                label="Short Description"
+              />
+              <CustomInput
+                id="longdescription"
+                type="text"
+                placeholder="Long Description"
+                value={formData.longdescription}
+                onChange={handleInputChange}
+                error={errors.longdescription}
+                label="Long Description"
+              />
+            </div>
+          </div>
+        </section>
+           {/* description ended */}
+
 
         <section className="mb-6">
           <h2 className="text-xl font-semibold mb-4">Password</h2>

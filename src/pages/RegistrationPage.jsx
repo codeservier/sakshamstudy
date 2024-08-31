@@ -23,6 +23,7 @@ const RegistrationPage = () => {
   const [errors, setErrors] = useState({});
   const [courseError, setCourseError] = useState("");
   const [slotError, setSlotError] = useState("");
+  const [showInput, setShowInput] = useState(false);
 
   const navigate = useNavigate();
 
@@ -78,8 +79,9 @@ const RegistrationPage = () => {
     if (selectedSlot && !formData.selectedSlots.includes(selectedSlot)) {
       setFormData((prevData) => ({
         ...prevData,
-        selectedSlots: [...prevData.selectedSlots, selectedSlot],
+        slot: selectedSlot,
       }));
+      setShowInput(true);
       setSlotError("");
     }
   };
@@ -91,6 +93,7 @@ const RegistrationPage = () => {
         (slot) => slot !== slotToRemove
       ),
     }));
+    setShowInput(false);
   };
 
   const handleOnSubmit = (e) => {
@@ -146,8 +149,8 @@ const RegistrationPage = () => {
     // Construct query params
     const queryParams = new URLSearchParams({
       ...formData,
-      selectedHall: formData.selectedHall.join(','),
-      selectedSlots: formData.selectedSlots.join(','),
+      selectedHall: formData.selectedHall.join(","),
+      selectedSlots: formData.selectedSlots.join(","),
     }).toString();
 
     navigate(`/document?${queryParams}`);
@@ -247,6 +250,7 @@ const RegistrationPage = () => {
                   <span className="text-red-600">{courseError}</span>
                 </div>
               </div>
+              {/* Chair Details strated */}
               <div className="flex flex-col flex-1">
                 <label className="mb-1 font-semibold text-gray-400">
                   Select Chair
@@ -283,6 +287,7 @@ const RegistrationPage = () => {
                   <span className="text-red-600">{slotError}</span>
                 </div>
               </div>
+              {/* chair Details ended */}
             </div>
           </section>
 
