@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import mission from "../assets/complete-the-mission.svg";
 import SingleBanner from "../components/banner/SingleBanner";
 import { db } from "../../firebase";
@@ -14,6 +14,11 @@ const NewContact = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [status, setStatus] = useState('');
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -207,14 +212,14 @@ const NewContact = () => {
                         placeholder="Your message"
                         value={formData.message}
                         onChange={handleInputChange}
-                        className="w-full h-24 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-secondary"
+                        className="w-full h-24 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-secondary text-black"
                       ></textarea>
                       <span id="messageError" className="text-red-600">{errors.message}</span>
                     </div>
                     <div className="flex justify-center">
                       <button
                         onClick={handleOnSubmit}
-                        className="px-6 py-2 bg-pri bg-primary text-white font-semibold rounded-lg hover:bg-secondary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        className="px-6 py-2 bg-pri bg-primary text-white font-semibold rounded-lg hover:bg-secondary transition-all duration-200 focus:ring-2"
                       >
                         Submit
                       </button>

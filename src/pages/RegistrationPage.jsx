@@ -16,6 +16,7 @@ const RegistrationPage = () => {
     pinCode: "",
     district: "",
     state: "",
+    libraryname:"",
     selectedHall: [],
     selectedSlots: [],
   });
@@ -109,6 +110,7 @@ const RegistrationPage = () => {
       pinCode,
       district,
       state,
+      libraryname,
       selectedHall,
       selectedSlots,
     } = formData;
@@ -128,6 +130,7 @@ const RegistrationPage = () => {
     } else if (phoneNumber.length !== 10) {
       newErrors.phoneNumber = "Phone number must be exactly 10 digits";
     }
+    if(!libraryname) newErrors.libraryname = "Please enter your Library name";
     if (selectedHall.length === 0) {
       setCourseError("Please select at least one course");
     } else {
@@ -179,11 +182,11 @@ const RegistrationPage = () => {
                 <CustomInput
                   id="name"
                   type="text"
-                  placeholder="Name"
+                  placeholder="Owner Name"
                   value={formData.name}
                   onChange={handleInputChange}
                   error={errors.name}
-                  label="Name"
+                  label="Owner Name"
                 />
               </div>
               <div className="flex-1">
@@ -213,86 +216,104 @@ const RegistrationPage = () => {
 
           {/* Library Related Details */}
           <section className="mb-6">
-            <h2 className="text-xl font-semibold mb-4">
-              Library Related Details
-            </h2>
-            <div className="space-y-4 md:space-y-0 md:flex md:gap-4">
-              <div className="flex flex-col flex-1">
-                <label className="mb-1 font-semibold text-gray-400">
-                  Hall Name
-                </label>
-                <select
-                  id="course"
-                  value={formData.course}
-                  onChange={handleCourseChange}
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2]"
-                >
-                  <option value="">Select Hall</option>
-                  {courses.map((course, index) => (
-                    <option key={index} value={course}>
-                      {course}
-                    </option>
-                  ))}
-                </select>
-                <div className="mt-2 flex flex-wrap gap-4">
-                  {formData.selectedHall.map((course, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center bg-[#42c4e2] text-white rounded-full py-1 px-4 border-b border-gray-200 mb-2"
-                    >
-                      <span className="mr-2">{course}</span>
-                      <button
-                        type="button"
-                        onClick={() => removeCourse(course)}
-                        className="text-white text-xl"
-                      >
-                        &#10005;
-                      </button>
-                    </div>
-                  ))}
-                  <span className="text-red-600">{courseError}</span>
-                </div>
-              </div>
-              {/* Chair Details strated */}
-              <div className="flex flex-col flex-1">
-                <label className="mb-1 font-semibold text-gray-400">
-                  Select Chair
-                </label>
-                <select
-                  id="slot"
-                  value={formData.slot}
-                  onChange={handleSlotChange}
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2]"
-                >
-                  <option value="">Number of Chairs</option>
-                  {slots.map((slot, index) => (
-                    <option key={index} value={slot}>
-                      Chair - {slot}
-                    </option>
-                  ))}
-                </select>
-                <div className="mt-2 flex flex-wrap gap-4">
-                  {formData.selectedSlots.map((slot, index) => (
-                    <div
-                      key={index}
-                      className="flex justify-between items-center bg-[#42c4e2] text-white rounded-full px-4 py-2"
-                    >
-                      <span className="mr-2">Slot {slot}</span>
-                      <button
-                        type="button"
-                        onClick={() => removeSlot(slot)}
-                        className="text-white text-xl"
-                      >
-                        &#10005;
-                      </button>
-                    </div>
-                  ))}
-                  <span className="text-red-600">{slotError}</span>
-                </div>
-              </div>
-              {/* chair Details ended */}
-            </div>
-          </section>
+  <h2 className="text-xl font-semibold mb-4">
+    Library Related Details
+  </h2>
+  
+  {/* Address Field */}
+  <div className="mb-6">
+    <CustomInput
+      id="libraryname"
+      type="text"
+      placeholder="Library Name"
+      value={formData.libraryname}
+      onChange={handleInputChange}
+      error={errors.libraryname}
+      label="Library Name"
+    />
+  </div>
+
+  {/* Hall and Seats Sections in Parallel */}
+  <div className="space-y-4 md:space-y-0 md:flex md:gap-4">
+    
+    {/* Hall Section */}
+    <div className="flex-1">
+      <label className="mb-1 font-semibold text-gray-400">
+        Hall Name
+      </label>
+      <select
+        id="course"
+        value={formData.course}
+        onChange={handleCourseChange}
+        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2]"
+      >
+        <option value="">Select Hall</option>
+        {courses.map((course, index) => (
+          <option key={index} value={course}>
+            {course}
+          </option>
+        ))}
+      </select>
+      <div className="mt-2 flex flex-wrap gap-4">
+        {formData.selectedHall.map((course, index) => (
+          <div
+            key={index}
+            className="flex items-center bg-[#42c4e2] text-white rounded-full py-1 px-4 border-b border-gray-200 mb-2"
+          >
+            <span className="mr-2">{course}</span>
+            <button
+              type="button"
+              onClick={() => removeCourse(course)}
+              className="text-white text-xl"
+            >
+              &#10005;
+            </button>
+          </div>
+        ))}
+        <span className="text-red-600">{courseError}</span>
+      </div>
+    </div>
+
+    {/* Seats Section */}
+    <div className="flex-1">
+      <label className="mb-1 font-semibold text-gray-400">
+        Select Chair
+      </label>
+      <select
+        id="slot"
+        value={formData.slot}
+        onChange={handleSlotChange}
+        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#42c4e2]"
+      >
+        <option value="">Number of Chairs</option>
+        {slots.map((slot, index) => (
+          <option key={index} value={slot}>
+            Chair - {slot}
+          </option>
+        ))}
+      </select>
+      <div className="mt-2 flex flex-wrap gap-4">
+        {formData.selectedSlots.map((slot, index) => (
+          <div
+            key={index}
+            className="flex justify-between items-center bg-[#42c4e2] text-white rounded-full px-4 py-2"
+          >
+            <span className="mr-2">Slot {slot}</span>
+            <button
+              type="button"
+              onClick={() => removeSlot(slot)}
+              className="text-white text-xl"
+            >
+              &#10005;
+            </button>
+          </div>
+        ))}
+        <span className="text-red-600">{slotError}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 
           {/* Address Details */}
           <section className="mb-6">

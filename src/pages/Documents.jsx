@@ -27,6 +27,7 @@ const Documents = () => {
     agreedToTerms: false,
     libraryLogo: "",
     domain: "",
+    domainurl:""
   });
   const [errors, setErrors] = useState({});
   const [logoFile, setLogoFile] = useState(null); // To store the selected file
@@ -89,7 +90,7 @@ const Documents = () => {
   };
 
   const handleRegister = async () => {
-    const { email, longdescription, password, shortdescription, confirmPassword, libraryLogo, domain } = formData;
+    const { email, longdescription, password, shortdescription, confirmPassword, libraryLogo, domain, domainurl } = formData;
 
     const newErrors = {};
     if (!password) newErrors.password = "Password is required";
@@ -108,7 +109,7 @@ const Documents = () => {
 
     if (!domain) {
       newErrors.domain = "Please select if you have a domain";
-    } else if (domain === "yes" && !formData.domain) {
+    } else if (domain === "yes" && !domainurl) {
       newErrors.domain = "Please write your domain";
     }
 
@@ -280,9 +281,13 @@ const Documents = () => {
           {formData.domain === "yes" && (
             <div className="space-y-4">
             <CustomInput
-                id="domain"
+                id="domainurl"
                 type="text"
-                placeholder="domain"
+                placeholder="domainurl"
+                value={formData.domainurl}
+                onChange={handleInputChange}
+                error={errors.domainurl}
+                label="domainurl"
               />
             </div>
           )}
