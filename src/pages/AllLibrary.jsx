@@ -86,8 +86,8 @@ const AllLibrary = () => {
               {allDocuments.map((card) => (
                 <Card
                   key={card.id}
-                  title={card.phoneNumber}
-                  description={card.address}
+                  title={card.libraryname}
+                  description={card.shortdescription}
                   image={card.libraryLogoUrl}
                   onClick={() => handleCardClick(card.id)} 
                 />

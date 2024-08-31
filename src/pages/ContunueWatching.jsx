@@ -25,7 +25,6 @@ const ContinueWatching = () => {
           id: doc.id,
           ...doc.data(),
         }));
-        // console.log("Fetched data:", allDocuments);
         const cardData = allDocuments.map((doc) => ({
           id: doc.id,
           title: doc.title || "No Title",
@@ -74,9 +73,9 @@ const ContinueWatching = () => {
     return () => clearTimeout(timer);
   }, [location]);
 
-  const handleCardClick = (card) => {
+  const handleCardClick = (id) => {
     // console.log(card);
-    navigate(`/coursedetail`, { state:{card }});
+    navigate(`/librarydetailpage`, { state:{id }});
   };
 
   return (
@@ -98,7 +97,7 @@ const ContinueWatching = () => {
                   title={card.phoneNumber}
                   description={card.address}
                   image={card.image}
-                  onClick={() => handleCardClick(card)}
+                  onClick={() => handleCardClick(card.id)}
                 />
               ))}
             </div>
