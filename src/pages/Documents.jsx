@@ -33,6 +33,7 @@ const Documents = () => {
   const [previewUrl, setPreviewUrl] = useState("");
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     // Parse URL params and set initial state
     const initialData = {};
     const queryParams = new URLSearchParams(location.search);
@@ -182,7 +183,7 @@ const Documents = () => {
           <Logo width="50" height="50" fill="#FF5733" />
         </div>
 
-        <h1 className="text-2xl font-bold text-center">Registration Here</h1>
+        <h1 className="text-2xl font-bold text-center">Register Your Library Here</h1>
         {/* logo start */}
         <section>
           <h2 className="text-xl font-semibold mb-2">Uploads</h2>
@@ -282,10 +283,6 @@ const Documents = () => {
                 id="domain"
                 type="text"
                 placeholder="domain"
-                value={formData.domain}
-                onChange={handleInputChange}
-                error={errors.domain}
-                label="Short Description"
               />
             </div>
           )}

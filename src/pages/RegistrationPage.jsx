@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../assets/logo/Logo";
 import CustomInput from "../components/customInput/CustomInput.jsx";
@@ -26,6 +26,9 @@ const RegistrationPage = () => {
   const [showInput, setShowInput] = useState(false);
 
   const navigate = useNavigate();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleInputChange = (e) => {
     const { id, value, type, checked } = e.target;
@@ -163,7 +166,7 @@ const RegistrationPage = () => {
           <Logo width="50" height="50" fill="#FF5733" />
         </div>
 
-        <h1 className="text-2xl font-bold text-center">Registration Here</h1>
+        <h1 className="text-2xl font-bold text-center">Register Your Library Here</h1>
 
         <form onSubmit={handleOnSubmit}>
           {/* Basic Details */}
