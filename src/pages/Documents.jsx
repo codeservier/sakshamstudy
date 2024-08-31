@@ -183,7 +183,7 @@ const Documents = () => {
           <Logo width="50" height="50" fill="#FF5733" />
         </div>
 
-        <h1 className="text-2xl font-bold text-center">Register Your Library Here</h1>
+        <h1 className="text-2xl font-bold text-center">Register Your Library </h1>
         {/* logo start */}
         <section>
           <h2 className="text-xl font-semibold mb-2">Uploads</h2>
