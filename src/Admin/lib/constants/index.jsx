@@ -17,10 +17,7 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		icon: <HiOutlineViewGrid />
 	},
 	{
-		key: 'alllibrary',
-		label: 'AllLibrary',
-		path: '/alllibrary',
-		icon: <HiOutlineCube />
+		
 	},
 	{
 		key: 'students',

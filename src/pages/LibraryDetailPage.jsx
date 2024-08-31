@@ -1,136 +1,102 @@
 import React, { useEffect, useState } from "react";
-import courseImage from "../assets/c1.jpg";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { db } from "../../firebase"; 
+import { doc, getDoc } from "firebase/firestore";
 import MultiScrollBanner from "../components/MultiScrollBanner";
-import { useLocation, useNavigate } from "react-router-dom";
 import ReviewSection from "../components/detailsTab/ReviewSection";
 import LibraryFeature from "../components/detailsTab/LibraryFeature";
 import SeatsAvailability from "../components/detailsTab/SeatsAvailability";
 import { ManagementTab } from "../components/detailsTab/ManagementTab";
-import { db } from "../../firebase";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import PopUpPages from "../pages/PopUpPages.jsx";
 
-const CourseDetailPage = () => {
+const LibraryDetailPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const { id } = state;
+
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [allDocuments, setAllDocuments] = useState([]);
+  const [activeTab, setActiveTab] = useState("learn");
+  const [showPopUp, setShowPopUp] = useState(false);
+
+
   if (!id) {
     return <div>No data available</div>;
   }
 
-  console.log("Cardsdata pritam", id);
 
   useEffect(() => {
     const fetchCardData = async () => {
       try {
         setLoading(true);
-        const collectionRef = collection(db, "registration");
-        const querySnapshot = await getDocs(collectionRef);
-        const allDocuments = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setAllDocuments(allDocuments);
-        console.log(allDocuments);
-        setLoading(false);
+        const docRef = doc(db, "registration", id);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const data = {
+            id: docSnap.id,
+            ...docSnap.data()
+          };
+          setUserData(data);
+          console.log("Fetched Data: ", data);
+        } else {
+          console.log("No such document!");
+          setUserData(null);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
+        setError(error.message);
+      } finally {
         setLoading(false);
       }
     };
+
     fetchCardData();
-  }, []);
+  }, [id]);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
 
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     try {
-       
-  //       const colRef = collection(db, "registration");
-  //       const q = query(colRef, where("id", "==", id));
-
-  //       const querySnapshot = await getDocs(q);
-  //       console.log('PPPP :',querySnapshot.docs[0]);
-  //       if (!querySnapshot.empty) {
-  //         const docSnap = querySnapshot.docs[0];
-  //         setUserData(docSnap.data());
-  //         console.log("User data:", docSnap.data());
-  //       } else {
-  //         console.log("No such document!");
-  //         setUserData(null);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //       setError(error.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   if (id) {
-  //     fetchUserData(id);
-  //   } else {
-  //     setUserData(null);
-  //     setLoading(false);
-  //   }
-
-   
-  // }, [id]);
-
-
-
-  const [activeTab, setActiveTab] = useState("learn");
-  const feedbackData = [
-    { stars: 5, percentage: 34 },
-    { stars: 4, percentage: 37 },
-    { stars: 3, percentage: 16 },
-    { stars: 2, percentage: 3 },
-    { stars: 1, percentage: 1 },
-  ];
+  const handleOnClickGetstarted = () =>{
+    setShowPopUp(true);
+  }
   return (
     <div className="max-w-screen-xl mx-auto px-2">
-      <div className="container  mx-auto p-4 my-4  ">
+      <div className="container mx-auto p-4 my-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 my-2">
-          <div className=" ">
+          <div>
             <img
-              // src={card.libraryLogoUrl}
+              src={userData?.libraryLogoUrl || courseImage}  
               alt="Course"
               className="w-full h-full object-cover rounded-lg"
             />
           </div>
           <div className="pl-0 lg:pl-4 my-0 sm:my-0 flex flex-col justify-between">
             <div>
-              <h1 className="text-3xl font-bold mb-2">dfgdfsgds</h1>
-              <p className="text-gray-700 mb-4">
-                Learn to quickly connect with crowds of strangers, be better on
-                dates or ace that job interview.
-              </p>
+              <h1 className="text-3xl font-bold mb-   2">{userData?.name || "Course Title"}</h1>
+              <p className="text-gray-700 mb-4">{userData?.description || "Course Description"}</p>
               <div className="flex items-center mb-4">
-                <span className="text-yellow-500 text-xl mr-2">★ 4.4</span>
-                <span className="text-gray-700">14,716 ratings</span>
+                <span className="text-yellow-500 text-xl mr-2">★ {userData?.rating || "N/A"}</span>
+                <span className="text-gray-700">{userData?.reviewsCount || "N/A"} ratings</span>
               </div>
+              <div className="text-gray-700 mb-4">{userData?.details || "Course Details"}</div>
               <div className="text-gray-700 mb-4">
-                It is a long established fact that a reader will be distracted
-                by the readable content of a page when looking at its layout. It
-                is a long established fact that a reader will be distracted by
-                is a long established fact that a reader will be distracted by
-                the readable content of a page when looking at its layout.
-              </div>
-              <div className="text-gray-700 mb-4">
-                Created by
-                <span className="font-semibold text-[#F68B33]">
-                  Ricardo Mendoza
-                </span>
+                Created by <span className="font-semibold text-[#F68B33]">{userData?.creator || "Instructor"}</span>
               </div>
             </div>
             <button
-              onClick={() => navigate("/lecture")}
-              className="bg-[#F68B33] w-full text-white px-4 py-2 rounded-lg"
+              onClick={handleOnClickGetstarted} // Toggle pop-up visibility
+              className="hidden md:block text-center  bg-primary hover:bg-secondary 
+              hover:cursor-pointer transition-all duration-200 rounded-[20px] p-2.5 px-8
+               text-white hover:no-underline hover:scale-100 hover:translate-x-3 shadow-lg "
             >
-              Go to course
+              Get start with us
             </button>
           </div>
         </div>
@@ -146,7 +112,7 @@ const CourseDetailPage = () => {
                   }`}
                   onClick={() => setActiveTab("features")}
                 >
-                  Our Fetures
+                  Our Features
                 </button>
                 <button
                   className={`py-2 px-4 text-sm sm:text-lg font-medium ${
@@ -156,7 +122,7 @@ const CourseDetailPage = () => {
                   }`}
                   onClick={() => setActiveTab("seat")}
                 >
-                  Seat Avalability
+                  Seat Availability
                 </button>
                 <button
                   className={`py-2 px-4 text-sm sm:text-lg font-medium ${
@@ -170,39 +136,43 @@ const CourseDetailPage = () => {
                 </button>
                 <button
                   className={`py-2 px-4 text-sm sm:text-lg font-medium ${
-                    activeTab === "mangement"
+                    activeTab === "management"
                       ? "border-b-2 border-indigo-600 text-indigo-600"
                       : "text-gray-600"
                   }`}
-                  onClick={() => setActiveTab("mangement")}
+                  onClick={() => setActiveTab("management")}
                 >
-                  Mangement
+                  Management
                 </button>
               </nav>
             </div>
             <div className="mt-4">
               {activeTab === "features" && <LibraryFeature />}
-              {activeTab === "seat" && <SeatsAvailability card={card} />}
+              {activeTab === "seat" && <SeatsAvailability userData={userData} />}
               {activeTab === "reviews" && (
-                <ReviewSection rating={4.4} feedback={feedbackData} />
+                <ReviewSection rating={userData?.rating || 0} />
               )}
-              {activeTab === "mangement" && <ManagementTab />}
+              {activeTab === "management" && <ManagementTab />}
             </div>
           </div>
         </div>
         <div className="my-3">
           <h1 className="text-3xl font-bold mb-2">
-            Get more with paid Communication Skills courses
+            Here is some other library in your location
           </h1>
           <p className="text-gray-700 mb-4">
             Enroll in our in-depth courses from top-rated instructors
           </p>
-
           <MultiScrollBanner />
         </div>
       </div>
+      <div className="max-w-screen-xl mx-auto px-2">
+    {showPopUp && <PopUpPages
+      onClose={() => setShowPopUp(false)} />}
+  </div>
+
     </div>
   );
 };
 
-export default CourseDetailPage;
+export default LibraryDetailPage;

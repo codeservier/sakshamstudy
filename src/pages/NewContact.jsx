@@ -136,7 +136,7 @@ const NewContact = () => {
                   <div className="w-full max-w-lg p-8 bg-white rounded-lg shadow-lg  hover:scale-95 hover:bg-white transition-all duration-300">
                     <div className="flex justify-between mb-6 border-b">
                       <button className="text-primary font-semibold py-2 px-4 border-secondary border-b-2">
-                        Course Enquiry
+                      Libraries Enquiry
                       </button>
                     </div>
                     <div className="mb-4">

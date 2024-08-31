@@ -27,7 +27,7 @@ const Header = () => {
             Home
           </Link>
           <Link to="/alllibrary" className={getLinkClasses("/alllibrary")}>
-           AllLibrary
+           All Library
           </Link>
           <Link to="/about" className={getLinkClasses("/about")}>
             About Us
