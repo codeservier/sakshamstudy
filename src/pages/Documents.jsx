@@ -299,7 +299,7 @@ const Documents = () => {
               <CustomInput
                 id="shortdescription"
                 type="text"
-                placeholder="shortdescription"
+                placeholder="Short Description"
                 value={formData.shortdescription}
                 onChange={handleInputChange}
                 error={errors.shortdescription}
