@@ -34,7 +34,7 @@ const MobNavLinks = () => {
           <a href="/" className="hover:text-gray-300">
             Home
           </a>
-          <a href="/mylearning" className="hover:text-gray-300">
+          <a href="/allLibrary" className="hover:text-gray-300">
             My Learning
           </a>
           <a href="/about" className="hover:text-gray-300">
@@ -77,7 +77,7 @@ const MobNavLinks = () => {
           <a href="/" className="block px-4 py-2 hover:bg-gray-200">
             Home
           </a>
-          <a href="/mylearning" className="block px-4 py-2 hover:bg-gray-200">
+          <a href="/allLibrary" className="block px-4 py-2 hover:bg-gray-200">
             My Learning
           </a>
           <a href="/about" className="block px-4 py-2 hover:bg-gray-200">

@@ -26,8 +26,8 @@ const Header = () => {
           <Link to="/" className={getLinkClasses("/")}>
             Home
           </Link>
-          <Link to="/mylearning" className={getLinkClasses("/mylearning")}>
-           Libraries
+          <Link to="/alllibrary" className={getLinkClasses("/alllibrary")}>
+           AllLibrary
           </Link>
           <Link to="/about" className={getLinkClasses("/about")}>
             About Us
@@ -74,12 +74,12 @@ const Header = () => {
             Home
           </Link>
           <Link
-            to="/mylearning"
+            to="/allLibrary"
             className={`block px-4 py-2 hover:bg-gray-200 ${getLinkClasses(
-              "/mylearning"
+              "/allLibrary"
             )}`}
           >
-           Libraries
+           AllLibrary
           </Link>
           <Link
             to="/about"

@@ -4,6 +4,7 @@ const ReviewSection = ({ rating, feedback }) => {
   return (
     <div className="p-4">
       {/* Featured Review */}
+      <h2 className="text-2xl font-bold mb-2">Reviews</h2>
 
       {/* Student Feedback */}
       <div className="mb-8">

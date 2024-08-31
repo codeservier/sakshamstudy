@@ -5,7 +5,7 @@ import videoFile3 from "../assets/v3.mp4";
 import videoFile4 from "../assets/v4.mp4";
 import videoFile5 from "../assets/v5.mp4";
 import videoFile6 from "../assets/v6.mp4";
-import ReviewSection from "../components/ReviewSection";
+import ReviewSection from "../components/detailsTab/ReviewSection";
 import PlayList from "../components/PlayList";
 
 const LecturePage = () => {

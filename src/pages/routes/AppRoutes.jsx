@@ -6,12 +6,12 @@ import FaqPage from "../FaqPage";
 import AboutPage from "../AboutPage";
 import ContactPage from "../ContactPage";
 import SearchPage from "../SearchPage";
-import MyLearning from "../MyLearning";
+import AllLibrary from "../AllLibrary";
 import PageNotFound from "../PageNotFound";
 import RegistrationPage from "../RegistrationPage";
 import { HomePage } from "../HomePage";
 import Login from "../Login";
-import CourseDetailPage from "../CourseDetailPage";
+import LibraryDetailPage from "../LibraryDetailPage";
 import LecturePage from "../LecturePage";
 import Myprofile from "../../components/profile/Myprofile";
 import Subscription from "../../components/profile/Subscription";
@@ -25,10 +25,15 @@ import PaymentPage from "../../components/PaymentPage";
 import AdminDashboard from "../../Admin/dashboard/AdminDashboard";
 import Dashboard from "../../Admin/pages/Dashboard";
 import AdLayout from "../../Admin/components/shared/AdLayout";
-import Product from "../../Admin/pages/Branches";
 import Layout from "../../components/Layout/Layout";
 import Documents from "../Documents";
 import ContinueWatching from "../ContunueWatching";
+
+
+// admin imports 
+import Branches from "../../Admin/pages/Branches";
+
+
 
 const AppRoutes = () => {
   return (
@@ -41,8 +46,8 @@ const AppRoutes = () => {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/new-contact" element={<NewContact />} />
           <Route path="/search" element={<SearchPage />} />
-          <Route path="/mylearning" element={<MyLearning />} />
-          <Route path="/coursedetail" element={<CourseDetailPage />} />
+          <Route path="/allLibrary" element={<AllLibrary />} />
+          <Route path="/librarydetailpage" element={<LibraryDetailPage />} />
           <Route path="/register" element={<RegistrationPage />} />
           <Route path="/profile/subscription" element={<Subscription />} />
           <Route path="/profile/paymentMethods" element={<PaymentMethod />} />
@@ -63,7 +68,7 @@ const AppRoutes = () => {
         {/* Admin routes with AdminLayout */}
         <Route element={<AdLayout />}>
           <Route path="/admin" element={<Dashboard />} />
-          <Route path="/branches" element={<Product />} />
+          <Route path="/alllibrary" element={<Branches />} />
         </Route>
       </Routes>
     </BrowserRouter>

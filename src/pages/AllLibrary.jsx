@@ -5,7 +5,7 @@ import Loader from "../components/loader/Loader";
 import { useNavigate, useLocation } from "react-router-dom";
 import { db, collection, getDocs } from "../../firebase";
 
-const ContinueWatching = () => {
+const AllLibrary = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -13,7 +13,8 @@ const ContinueWatching = () => {
   const techCoursesRef = useRef(null);
 
   const [loading, setLoading] = useState(true);
-  const [cardsData, setCardsData] = useState([]);
+  const [allDocuments, setAllDocuments] = useState([]);
+
 
   useEffect(() => {
     const fetchCardData = async () => {
@@ -25,17 +26,8 @@ const ContinueWatching = () => {
           id: doc.id,
           ...doc.data(),
         }));
-        // console.log("Fetched data:", allDocuments);
-        const cardData = allDocuments.map((doc) => ({
-          id: doc.id,
-          title: doc.title || "No Title",
-          district: doc.district || "No District",
-          phoneNumber: doc.phoneNumber || "No Phone Number",
-          address: doc.address || "No Address",
-          image: doc.libraryLogoUrl || "default-image-url",
-        }));
-
-        setCardsData(cardData);
+        setAllDocuments(allDocuments);
+        console.log(allDocuments);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -50,7 +42,7 @@ const ContinueWatching = () => {
       if (location.state?.courseType === "ourCourses" && coursesRef.current) {
         const top =
           coursesRef.current.getBoundingClientRect().top + window.pageYOffset;
-        window.scrollTo({ top: top - 150, behavior: "smooth" });
+          window.scrollTo({ top: top - 150, behavior: "smooth" });
       } else if (
         location.state?.courseType === "techCourses" &&
         techCoursesRef.current
@@ -74,9 +66,8 @@ const ContinueWatching = () => {
     return () => clearTimeout(timer);
   }, [location]);
 
-  const handleCardClick = (card) => {
-    // console.log(card);
-    navigate(`/coursedetail`, { state:{card }});
+  const handleCardClick = (id) => {
+    navigate(`/librarydetailpage`, { state:{id}});
   };
 
   return (
@@ -92,13 +83,13 @@ const ContinueWatching = () => {
               AllLibrary
             </h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {cardsData.map((card) => (
+              {allDocuments.map((card) => (
                 <Card
                   key={card.id}
                   title={card.phoneNumber}
                   description={card.address}
-                  image={card.image}
-                  onClick={() => handleCardClick(card)}
+                  image={card.libraryLogoUrl}
+                  onClick={() => handleCardClick(card.id)} 
                 />
               ))}
             </div>
@@ -109,4 +100,4 @@ const ContinueWatching = () => {
   );
 };
 
-export default ContinueWatching;
+export default AllLibrary;

@@ -8,7 +8,7 @@ const   Toppicks = () => {
   const navigate = useNavigate();
 
   const handleShowMoreClick = (courseType) => {
-    navigate(`/mylearning`, { state: { courseType } });
+    navigate(`/alllibrary`, { state: { courseType } });
   };
 
   const cardsData = [
