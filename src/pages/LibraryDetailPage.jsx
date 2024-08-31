@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { db } from "../../firebase"; 
+import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import MultiScrollBanner from "../components/MultiScrollBanner";
 import ReviewSection from "../components/detailsTab/ReviewSection";
@@ -8,6 +8,8 @@ import LibraryFeature from "../components/detailsTab/LibraryFeature";
 import SeatsAvailability from "../components/detailsTab/SeatsAvailability";
 import { ManagementTab } from "../components/detailsTab/ManagementTab";
 import PopUpPages from "../pages/PopUpPages.jsx";
+const dummyImage = "https://via.placeholder.com/600x400.png?text=Library+Poster"
+
 
 const LibraryDetailPage = () => {
   const navigate = useNavigate();
@@ -20,11 +22,9 @@ const LibraryDetailPage = () => {
   const [activeTab, setActiveTab] = useState("learn");
   const [showPopUp, setShowPopUp] = useState(false);
 
-
   if (!id) {
     return <div>No data available</div>;
   }
-
 
   useEffect(() => {
     const fetchCardData = async () => {
@@ -36,7 +36,7 @@ const LibraryDetailPage = () => {
         if (docSnap.exists()) {
           const data = {
             id: docSnap.id,
-            ...docSnap.data()
+            ...docSnap.data(),
           };
           setUserData(data);
           console.log("Fetched Data: ", data);
@@ -62,32 +62,50 @@ const LibraryDetailPage = () => {
     return <div>Error: {error}</div>;
   }
 
-
-  const handleOnClickGetstarted = () =>{
-    setShowPopUp(true);
-  }
+  const handleOnClickGetstarted = () => {
+    if(userData && userData?.domain === "yes" && userData?.domainurl){
+      window.open(`https://${userData?.domainurl}`, "_blank");
+    }
+    else
+    {
+      setShowPopUp(true);
+    }
+  };
   return (
     <div className="max-w-screen-xl mx-auto px-2">
       <div className="container mx-auto p-4 my-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 my-2">
           <div>
             <img
-              src={userData?.libraryLogoUrl || courseImage}  
+              src={userData?.libraryLogoUrl || dummyImage}
               alt="Course"
               className="w-full h-full object-cover rounded-lg"
             />
           </div>
           <div className="pl-0 lg:pl-4 my-0 sm:my-0 flex flex-col justify-between">
             <div>
-              <h1 className="text-3xl font-bold mb-   2">{userData?.name || "Course Title"}</h1>
-              <p className="text-gray-700 mb-4">{userData?.description || "Course Description"}</p>
+              <h1 className="text-3xl font-bold mb-   2">
+                {userData?.libraryname || "Course Title"}
+              </h1>
+              <p className="text-gray-700 mb-4">
+                {userData?.shortdescription || "Course Description"}
+              </p>
               <div className="flex items-center mb-4">
-                <span className="text-yellow-500 text-xl mr-2">★ {userData?.rating || "N/A"}</span>
-                <span className="text-gray-700">{userData?.reviewsCount || "N/A"} ratings</span>
+                <span className="text-yellow-500 text-xl mr-2">
+                  ★ {userData?.rating || "N/A"}
+                </span>
+                <span className="text-gray-700">
+                  {userData?.reviewsCount || "N/A"} ratings
+                </span>
               </div>
-              <div className="text-gray-700 mb-4">{userData?.details || "Course Details"}</div>
               <div className="text-gray-700 mb-4">
-                Created by <span className="font-semibold text-[#F68B33]">{userData?.creator || "Instructor"}</span>
+                {userData?.longdescription || "Course Details"}
+              </div>
+              <div className="text-gray-700 mb-4">
+               Library owner name : 
+                <span className="font-semibold text-[#F68B33]">
+                  {userData?.name || "Instructor"}
+                </span>
               </div>
             </div>
             <button
@@ -148,7 +166,9 @@ const LibraryDetailPage = () => {
             </div>
             <div className="mt-4">
               {activeTab === "features" && <LibraryFeature />}
-              {activeTab === "seat" && <SeatsAvailability userData={userData} />}
+              {activeTab === "seat" && (
+                <SeatsAvailability userData={userData} />
+              )}
               {activeTab === "reviews" && (
                 <ReviewSection rating={userData?.rating || 0} />
               )}
@@ -167,10 +187,16 @@ const LibraryDetailPage = () => {
         </div>
       </div>
       <div className="max-w-screen-xl mx-auto px-2">
-    {showPopUp && <PopUpPages
-      onClose={() => setShowPopUp(false)} />}
-  </div>
-
+        {showPopUp && (
+          <PopUpPages
+            onClose={() => setShowPopUp(false)}
+            posterImageUrl={userData?.libraryLogoUrl || dummyImage}
+            libraryName={userData?.name}
+            email={userData?.email}
+            mobileNumber={userData?.phoneNumber}
+          />
+        )}
+      </div>
     </div>
   );
 };
