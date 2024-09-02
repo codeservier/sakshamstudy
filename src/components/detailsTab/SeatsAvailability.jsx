@@ -1,32 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 
-const seatsData = [
-  ["A1", "A2", "A3", "A4", "A5"],
-  ["B1", "B2", "B3", "B4", "B5"],
-  ["C1", "C2", "C3", "C4", "C5"],
-  ["D1", "D2", "D3", "D4", "D5"],
-  ["E1", "E2", "E3", "E4", "E5"],
-];
+const SeatsAvailability = ({ numberOfSeats = 60, bookedSeats = 40 }) => {
+  const generateSeats = (count) => {
+    return Array.from({ length: count }, (_, index) => (index + 1).toString());
+  };
 
-const bookedSeats = ["A1", "B3", "D4"];
+  const seatsToShow = generateSeats(numberOfSeats);
 
-const SeatsAvailability = ({ numberofseats }) => {
-  
-  const totalSeatsToShow = numberofseats || seatsData.flat().length;
-  const availableSeats = seatsData.flat().slice(0, totalSeatsToShow).map((seat) => ({
+  const availableSeats = seatsToShow.map((seat, index) => ({
     seat,
-    isBooked: bookedSeats.includes(seat),
+    isBooked: index < bookedSeats, 
   }));
 
   return (
     <div className="container mx-auto p-6">
       <h2 className="text-2xl font-bold mb-4 text-center">Seat Availability</h2>
       <div className="flex flex-col items-center">
-        {seatsData
-          .flat()
-          .slice(0, totalSeatsToShow)
+        {availableSeats
           .reduce((rows, seat, index) => {
-            const rowIndex = Math.floor(index / 5);
+            const rowIndex = Math.floor(index / 15); 
             if (!rows[rowIndex]) {
               rows[rowIndex] = [];
             }
@@ -35,16 +27,15 @@ const SeatsAvailability = ({ numberofseats }) => {
           }, [])
           .map((row, rowIndex) => (
             <div key={rowIndex} className="flex mb-2">
-              {row.map((seat) => {
-                const seatStatus = availableSeats.find((s) => s.seat === seat);
-                const seatClass = seatStatus.isBooked
-                  ? "bg-red-500 text-white"
-                  : "bg-green-500 text-white";
+              {row.map(({ seat, isBooked }) => {
+                const seatClass = isBooked
+                  ? "bg-primary/80 text-white"
+                  : "bg-gray-300 text-white";
                 return (
                   <div
                     key={seat}
-                    className={`w-32 h-12 mx-1 flex items-center justify-center rounded ${seatClass} text-xs font-medium`}
-                    title={seatStatus.isBooked ? "Booked" : "Available"}
+                    className={`w-12 h-12 mx-1 flex items-center justify-center rounded ${seatClass} text-xs font-medium`}
+                    title={isBooked ? "Booked" : "Available"}
                   >
                     <span className="text-lg font-bold">{seat}</span>
                   </div>
