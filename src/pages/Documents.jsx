@@ -298,7 +298,7 @@ const Documents = () => {
 
            {/* decription started */}
            <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-4">Short Description :-</h2>
+          <h2 className="text-xl font-semibold mb-4">Description :-</h2>
           <div className="space-y-4">
             <div className="md:flex md:gap-4">
               <CustomInput
