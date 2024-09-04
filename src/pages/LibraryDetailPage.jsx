@@ -109,13 +109,14 @@ const LibraryDetailPage = () => {
               </div>
             </div>
             <button
-              onClick={handleOnClickGetstarted} // Toggle pop-up visibility
+              onClick={handleOnClickGetstarted}
               className="hidden md:block text-center  bg-primary hover:bg-secondary 
               hover:cursor-pointer transition-all duration-200 rounded-[20px] p-2.5 px-8
                text-white hover:no-underline hover:scale-100 hover:translate-x-3 shadow-lg "
             >
               Get start with us
             </button>
+
           </div>
         </div>
         <div>
@@ -167,7 +168,7 @@ const LibraryDetailPage = () => {
             <div className="mt-4">
               {activeTab === "features" && <LibraryFeature />}
               {activeTab === "seat" && (
-                <SeatsAvailability userData={userData} />
+                <SeatsAvailability numberOfSeats={userData.slot} bookedSeats={4} />
               )}
               {activeTab === "reviews" && (
                 <ReviewSection rating={userData?.rating || 0} />
